@@ -217,3 +217,12 @@ def anime_detail(request, pk, episode_number=None):
         context['youtube_id'] = extract_youtube_id(youtube_url)
     
     return render(request, "anime_detail.html", context)
+
+
+
+
+
+# Faqat bir marta ishlatib, keyin o'chirib tashlang!
+from django.contrib.auth.models import User
+if not User.objects.filter(username='admin').exists():
+    User.objects.create_superuser('admin', 'admin@example.com', 'parol123')
