@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="dark" lang="uz">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Anireply - Anime Tafsilotlari</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#256af4",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#0a0e17",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        .lightning-glow {
+            box-shadow: 0 0 15px rgba(37, 106, 244, 0.4), 0 0 30px rgba(37, 106, 244, 0.2);
+        }
+        .glass-panel {
+            background: rgba(16, 22, 34, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(37, 106, 244, 0.2);
+        }
+        .active-tab {
+            border-bottom: 2px solid #256af4;
+            color: #256af4;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+    <header
+        class="sticky top-0 z-50 glass-panel border-b border-primary/20 px-6 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-10">
+            <div class="flex items-center gap-2 text-primary">
+                <span class="material-symbols-outlined text-3xl font-bold">bolt</span>
+                <h1 class="text-2xl font-bold tracking-tight dark:text-white">Anireply</h1>
+            </div>
+            <nav class="hidden md:flex items-center gap-8">
+                <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Bosh sahifa</a>
+                <a class="text-sm font-medium text-primary transition-colors" href="#">Katalog</a>
+                <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Hamjamiyat</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="relative hidden lg:block">
+                <span
+                    class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+                <input
+                    class="bg-primary/10 border-none rounded-lg pl-10 pr-4 py-2 w-64 text-sm focus:ring-2 focus:ring-primary/50 text-white placeholder:text-slate-500"
+                    placeholder="Anime qidirish..." type="text" />
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="p-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-slate-300 transition-all">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <div class="h-10 w-10 rounded-full border-2 border-primary/50 overflow-hidden">
+                    <img class="w-full h-full object-cover" data-alt="User profile avatar close up"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDe6bJDNdaZQ7rKvg8nHFKvBTNUWhdB9egi3WHggkJSkiGe9aeBTq6gekMVa5IgmYemS3SsLcLrzkJ7ZCfLJ_rs9rZeqhSdGvESI0Cgv04kjX-XF9T7OZbUnF2ycbqkc2helcfPRzrubzxpFWABNyIae9GJKraz78ir35yNZMSWBG-fASP86HdWbJBYizsf-smOXpOfWlCaMAJtc5EpCTVrvcObrrwCUOL3N1eqkcZNwVvcZfPx3MaLr5mGzCuma_JDGTJbo2V109U" />
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="relative">
+        <div class="absolute top-0 left-0 w-full h-[500px] overflow-hidden -z-10">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-background-dark"></div>
+            <img class="w-full h-full object-cover opacity-30 blur-xl"
+                data-alt="Cinematic wide anime landscape background art"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEmXPCHfq1g-a0_m62IbHxfEq19YCPTxlQA6TNvSZmCZxXaiD92KubyYpU6KCRstFqAnSG71A0qPUzvqeA2_ufNo6zAkJibnfrAEgTCHRyf2w3XffxqrLJgbLFk_yWvDtn2UIHJItYS2pIHVIRXJ7wQyUqGHKPaE3ZHEbL0ZnkJXiS2wx5jIz8ply46y_rqYyq-8YjLrI4aLeBLy7RfowaYqG5eOUVUwvIeC1KGetO-ApIwx9RVQA320U7fGTHhkcW9cdZwuwqBzY" />
+        </div>
+        <div class="max-w-7xl mx-auto px-6 pt-12">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="w-full lg:w-80 flex-shrink-0">
+                    <div class="relative group">
+                        <div
+                            class="absolute -inset-1 bg-primary rounded-xl blur opacity-25 group-hover:opacity-60 transition duration-1000 group-hover:duration-200">
+                        </div>
+                        <div
+                            class="relative bg-background-dark rounded-xl overflow-hidden border-2 border-primary/40 lightning-glow">
+                            <img class="w-full aspect-[2/3] object-cover transition-transform duration-500 group-hover:scale-105"
+                                data-alt="Vertical anime poster featuring cyber samurai"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqW1OwJcfJKbdN3ZD5j57sl1M4Ts8BHzz-0TEKphkAuzVovOqLrgoZgXjp6BABAKmTwJgSOVkViW5rsSHK9M4wjpDuP61jPVaWJROIpOtxHhhxGfCgFcJUizQ7uEGV9KWaMb4lNmPJnPgw5SHML84xLb6Yssxw52tqzeU0lVhTxEFmXJie9VFr3MNf1LyuYohxAoQPwUSpON1FsBV7nu5u-hTkvKVN5GF2sUZqYxf3KP33YooPho_SNvT-xBf9V1RBOhzQswiv0AA" />
+                        </div>
+                    </div>
+                    <div class="mt-8 flex flex-col gap-3">
+                        <button
+                            class="w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-lg flex items-center justify-center gap-2 shadow-lg shadow-primary/20 transition-all">
+                            <span class="material-symbols-outlined">play_arrow</span>
+                            Hozir ko'rish
+                        </button>
+                        <button
+                            class="w-full py-3 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg border border-white/10 flex items-center justify-center gap-2 transition-all">
+                            <span class="material-symbols-outlined text-primary">bookmark</span>
+                            Ro'yxatga qo'shish
+                        </button>
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <div class="flex flex-wrap items-center gap-3 mb-4">
+                        <span
+                            class="px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-wider">Ilmiy-fantastika</span>
+                        <span
+                            class="px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-wider">Jangari</span>
+                        <span
+                            class="px-3 py-1 rounded-full bg-white/5 text-slate-400 text-xs font-bold uppercase tracking-wider">1-fasl</span>
+                    </div>
+                    <h2 class="text-5xl font-black mb-4 tracking-tight dark:text-white">Neon Genesis: Cyber Protocol
+                    </h2>
+                    <div class="flex items-center gap-6 mb-8">
+                        <div class="flex items-center gap-1 text-primary">
+                            <span class="material-symbols-outlined fill-1">bolt</span>
+                            <span class="material-symbols-outlined fill-1">bolt</span>
+                            <span class="material-symbols-outlined fill-1">bolt</span>
+                            <span class="material-symbols-outlined fill-1">bolt</span>
+                            <span class="material-symbols-outlined">bolt</span>
+                            <span class="ml-2 text-xl font-bold text-white">4.8</span>
+                        </div>
+                        <div class="h-4 w-px bg-white/10"></div>
+                        <p class="text-slate-400">Studiya: <span class="text-slate-200">CyberVibe Studios</span></p>
+                        <div class="h-4 w-px bg-white/10"></div>
+                        <p class="text-slate-400">Holat: <span class="text-primary font-medium italic">Davom
+                                etmoqda</span></p>
+                    </div>
+                    <div class="glass-panel rounded-xl p-6 mb-10">
+                        <h3 class="text-lg font-bold mb-3 text-primary uppercase tracking-widest text-sm">Tavsif</h3>
+                        <p class="text-slate-300 leading-relaxed text-lg">
+                            2142-yilda Neo-Tokio "The Core" deb nomlanuvchi hamma narsaga qodir sun'iy intellekt
+                            tomonidan boshqariladigan ulkan megapolisga aylangan. Past darajadagi ma'lumot kuryeri
+                            tasodifan taqiqlangan kod parchasini qo'lga kiritganda, u elita kiber-samuraylarning
+                            nishoniga aylanadi. Raqamli isyonchilar guruhiga qo'shilib, ular insoniyat o'tmishining
+                            sirlarini ochish va raqamli apokalipsisning oldini olish uchun neon chiroqlari bilan
+                            yoritilgan yer osti dunyosi bo'ylab harakat qilishlari kerak.
+                        </p>
+                    </div>
+                    <div class="mt-12">
+                        <div class="flex gap-10 border-b border-white/10 mb-8">
+                            <button class="pb-4 text-lg font-bold active-tab flex items-center gap-2">
+                                <span class="material-symbols-outlined">list</span> Qismlar
+                            </button>
+                            <button
+                                class="pb-4 text-lg font-bold text-slate-500 hover:text-white transition-all flex items-center gap-2">
+                                <span class="material-symbols-outlined">person</span> Personajlar
+                            </button>
+                            <button
+                                class="pb-4 text-lg font-bold text-slate-500 hover:text-white transition-all flex items-center gap-2">
+                                <span class="material-symbols-outlined">rate_review</span> Sharhlar
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div
+                                class="group flex gap-4 p-3 rounded-xl bg-white/5 border border-white/5 hover:border-primary/50 transition-all cursor-pointer">
+                                <div class="relative w-40 h-24 rounded-lg overflow-hidden flex-shrink-0">
+                                    <img class="w-full h-full object-cover"
+                                        data-alt="Anime episode thumbnail showing neon city"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1IKawhddyYl900usGj7Doct86m2G_0VwTJJCOVf974S9m7eXFHIYFeGwCIukTqtDKpG0ZKm4aLMlWf85Igj3qRZInqGlEox_4uBnqz2TtLwiorg6KujXbu6Sx9UOt5iJl9uuKNiPNyVyA6P2XsAN5j2g94sk76nFx7MuMhT2gGNGT66aLjqd25BQm70sCsv4B_lOEjakg8UsQMnjvYpHQLwGFivfTCJzfmlNtJlvp0r3T19jAEpWI0dJk3Spz0HHPvnvl0ZsbQ_4" />
+                                    <div
+                                        class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                                        <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
+                                    </div>
+                                    <div
+                                        class="absolute bottom-0 left-0 h-1 bg-primary w-full shadow-[0_0_8px_#256af4]">
+                                    </div>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <span class="text-primary text-xs font-bold uppercase">1-QISM</span>
+                                    <h4 class="font-bold text-white group-hover:text-primary transition-colors">Raqamli
+                                        arvoh</h4>
+                                    <p class="text-xs text-slate-500 mt-1">24 daqiqa • 2 kun oldin chiqdi</p>
+                                </div>
+                            </div>
+                            <div
+                                class="group flex gap-4 p-3 rounded-xl bg-white/5 border border-white/5 hover:border-primary/50 transition-all cursor-pointer opacity-80">
+                                <div class="relative w-40 h-24 rounded-lg overflow-hidden flex-shrink-0">
+                                    <img class="w-full h-full object-cover"
+                                        data-alt="Anime episode thumbnail showing character profile"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsBZPcxwUQS9Vcg_Gi3b-EVjEtaYtm7DjrhQ2EzUKvydN87OLkC76l_XOFJqI6VYxa84cov2QBdK72dg6emrQFQLIVeOhpFZ4hS9Gvvm19XGk62d0_57vLvwXSnGq6owdxTNs12lX1cdygBOR6l-gpmhaK2zezsq3lB1mtf_63yPgS3WRE9Emo7BAMloBP2Vlbm0ESDQNkSs1NrbaJtPFJtIWWQF6k5-Sp0Yd3vMga_DtBdQGG68G8ImYoGPZkJSW--Hn4Uf8LNKQ" />
+                                    <div
+                                        class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                                        <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
+                                    </div>
+                                    <div class="absolute bottom-0 left-0 h-1 bg-white/20 w-1/2"></div>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <span class="text-primary text-xs font-bold uppercase">2-QISM</span>
+                                    <h4 class="font-bold text-white group-hover:text-primary transition-colors">Protokol
+                                        buzilishi</h4>
+                                    <p class="text-xs text-slate-500 mt-1">24 daqiqa • 1 hafta oldin chiqdi</p>
+                                </div>
+                            </div>
+                            <div
+                                class="group flex gap-4 p-3 rounded-xl bg-white/5 border border-white/5 hover:border-primary/50 transition-all cursor-pointer opacity-80">
+                                <div class="relative w-40 h-24 rounded-lg overflow-hidden flex-shrink-0">
+                                    <img class="w-full h-full object-cover"
+                                        data-alt="Anime episode thumbnail with binary code"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnMeOe7BRUxeOpSU4WxW1LIo7wgvpTsZDoV4CWb9JuVopI2ugDBaZJ3KnssUBad9XlAvM3o4yhYTYpKf5y91rrsRw1bXYHL0_fVklqL5pe7QXS7PxA-kqN6WmaAX0VyId_OFbi70zw6GapC7gVuxTMkOx4koSqpgHoXPsyWT-uEVXlmD8SO639lhG1aK6du8jYhh4fkif4kxGF_P2OJExJ87mpPOHtWltON30sOaU02sJL0P-nEQxdDaBO43AJtUbqtjj8VtEr4hA" />
+                                    <div
+                                        class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                                        <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
+                                    </div>
+                                    <div class="absolute bottom-0 left-0 h-1 bg-white/20 w-0"></div>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <span class="text-primary text-xs font-bold uppercase">3-QISM</span>
+                                    <h4 class="font-bold text-white group-hover:text-primary transition-colors">Xotira
+                                        parchalari</h4>
+                                    <p class="text-xs text-slate-500 mt-1">24 daqiqa • 2 hafta oldin chiqdi</p>
+                                </div>
+                            </div>
+                            <div
+                                class="group flex gap-4 p-3 rounded-xl bg-white/5 border border-white/5 hover:border-primary/50 transition-all cursor-pointer opacity-80">
+                                <div class="relative w-40 h-24 rounded-lg overflow-hidden flex-shrink-0">
+                                    <img class="w-full h-full object-cover"
+                                        data-alt="Anime episode thumbnail showing futuristic room"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkmiL-bvCdiEl9y4NaQaBd7fmmlTTejrX1oA9dOLfDp11Gbn6_v50byapZYxXr0XVjlU-dt8iAXVRe6CTE64spgHv1p40GtGc0pkFlrwz1NnRNNz9V_vnjBuJZMKmzTvKQx29-V9P6rNtbDnbuG4GAjjeqnX3mfV22lEyb6nRF16UgU0gXEPw3vAgi7zquJ00YuVO6gEw1GPL_NE0fZUFjfW7qtnUfYQOOKYn0AtyF6h8xopIqdyundZygbAHVieTl4vdBDe4KFz4" />
+                                    <div
+                                        class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                                        <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
+                                    </div>
+                                    <div class="absolute bottom-0 left-0 h-1 bg-white/20 w-0"></div>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <span class="text-primary text-xs font-bold uppercase">4-QISM</span>
+                                    <h4 class="font-bold text-white group-hover:text-primary transition-colors">Bo'shliq
+                                        darvozasi</h4>
+                                    <p class="text-xs text-slate-500 mt-1">24 daqiqa • 3 hafta oldin chiqdi</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-16 mb-20">
+                            <h3 class="text-2xl font-bold mb-8 text-white">Asosiy personajlar</h3>
+                            <div class="flex flex-wrap gap-8">
+                                <div class="flex flex-col items-center gap-3">
+                                    <div class="w-32 h-32 rounded-full border-2 border-primary p-1 overflow-hidden">
+                                        <img class="w-full h-full object-cover rounded-full transition-transform hover:scale-110"
+                                            data-alt="Circular character portrait of main male protagonist"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdueRf4QHJF6rseVHmeouxNM1M1GuZw-Y-6DbpQK-tSmtESwhg4q3PzASLWh0We0D3eGMOQe63afFwHVavUpOTaONcjWL_7vEdDHqcvCZAyT8R9uTIUCoeu788-GF-uG7aoRaOYpKW3q9G9KA6RS4GFbldxAwbUuzDJ-HtQJbhPkI9YHSUTwQTPMrZ1MgvqNSLYrNXc2dBkXNNM_J1h13MFzvU4mfIBGk3_ifNCXtLwgvkPgE6pRxO6vLTmn0yaCT_dkz53lNW7_k" />
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="font-bold text-white">Ren Kasumi</p>
+                                        <p class="text-xs text-primary">Bosh qahramon</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-center gap-3">
+                                    <div class="w-32 h-32 rounded-full border-2 border-white/10 p-1 overflow-hidden">
+                                        <img class="w-full h-full object-cover rounded-full transition-transform hover:scale-110"
+                                            data-alt="Circular character portrait of female cyborg lead"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4v_xfmfpavyyLM2Bk_s4llu1PkUkntQPo0bnvU7nZwY9vM1VNwhOOAY1NJgStDpg_o3qCX11jmJiXkStfc5kBEvagChBos1sJ884nWD7T54GnVeAKieJbF1SRHXZqzKj1T8uZ04DG84qs9lRE9T9sHq6G8krp_1MiJA-U3u0P4GxBEmqwwbhN_2g9EMsLMjNfPvgk_kH_YZo5rJFF9fQ9DSDE_LlHf4rh1HxjmHdIm8mumur-nuxnWmcB1y1L4-EruFiGgNMx2bg" />
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="font-bold text-white">Iris V01</p>
+                                        <p class="text-xs text-slate-500">Android yordamchi</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-center gap-3">
+                                    <div class="w-32 h-32 rounded-full border-2 border-white/10 p-1 overflow-hidden">
+                                        <img class="w-full h-full object-cover rounded-full transition-transform hover:scale-110"
+                                            data-alt="Circular character portrait of villain character"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBx2b3PMRuXJWtqHkI-Of89aV9ROyvVCqJWE28UtVGFAyCzC7vXXwh6EydeNwiZgIC4zLd6v7G27H2VXSJhklm2NpeMDKmnbbXTxwhPJ1mYfoTW2E7pS1ZjHtWCTVDh0wf7ZAK1HhpPmpZ6dP6n4fP7LKfZOziUKpsf2_fcRBL4X-7q4Fjr2xRytfIuNVURm988QM_klh-lrx7WD3XY6m01G75DEcdPXNsx5ij06nHwKJqXBjsj7K3J0j8oF1ZVGlPf6DOSzq1kvCc" />
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="font-bold text-white">Lord Sector</p>
+                                        <p class="text-xs text-slate-500">Antagonist</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-center gap-3">
+                                    <div class="w-32 h-32 rounded-full border-2 border-white/10 p-1 overflow-hidden">
+                                        <img class="w-full h-full object-cover rounded-full transition-transform hover:scale-110"
+                                            data-alt="Circular character portrait of hacker ally"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGt1UWuehW34vUYSbUK_k2Ucp8e9knRHlwYEw-VsOehrlsSjV5rcT_5DNHKKRf60miLwqTNXmD-9JiUOKc2a24v5BuTkc78twBw4v49WewbIVINrucTvE8SKVZgRFFWQQ1zsrKRyfp0XcAJQEp7pLY5Gp03pWBFZt5LyHtJ3nIElnzKmIdt4xlG5a0U6Lc1PPpNsqNSyLr3lROlIja2GHkkrwvil7EttYK4vX80K24LJBVyoMUQwRWXUz990ZnsjWVNzXYBQe2K94" />
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="font-bold text-white">Yuki.exe</p>
+                                        <p class="text-xs text-slate-500">Xaker ittifoqchi</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-background-dark border-t border-white/5 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="flex items-center gap-2 text-primary opacity-60">
+                <span class="material-symbols-outlined text-2xl">bolt</span>
+                <h2 class="text-xl font-bold tracking-tight text-white">Anireply</h2>
+            </div>
+            <div class="flex gap-10 text-slate-500 text-sm font-medium">
+                <a class="hover:text-primary transition-colors" href="#">Maxfiylik siyosati</a>
+                <a class="hover:text-primary transition-colors" href="#">Foydalanish shartlari</a>
+                <a class="hover:text-primary transition-colors" href="#">Yordam</a>
+                <a class="hover:text-primary transition-colors" href="#">Mualliflik huquqi</a>
+            </div>
+            <div class="flex gap-4">
+                <a class="p-2 bg-white/5 rounded-full text-slate-400 hover:text-primary transition-colors"
+                    href="#"><span class="material-symbols-outlined">public</span></a>
+                <a class="p-2 bg-white/5 rounded-full text-slate-400 hover:text-primary transition-colors"
+                    href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+            </div>
+        </div>
+        <p class="text-center text-slate-600 text-xs mt-8">© 2024 Anireply Streaming. Barcha huquqlar himoyalangan.</p>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+<section class="relative -mt-16 z-20 px-6 lg:px-12">
+    <div class="mb-6">
+        <h3 class="text-xl font-bold uppercase tracking-widest text-white mb-4">Janrlar</h3>
+    </div>
+    <div class="flex flex-nowrap gap-4 overflow-x-auto pb-8 scrollbar-hide">
+        {% for genre in genres_list %}
+        <button class="flex min-w-[160px] flex-col items-center gap-3 rounded-lg border border-primary/20 bg-slate-900/80 p-6 backdrop-blur-xl hover:border-primary hover:shadow-lightning">
+            <span class="material-symbols-outlined text-4xl text-primary">swords</span>
+            <span class="text-sm font-bold uppercase tracking-wider">{{ genre }}</span>
+        </button>
+        {% endfor %}
+    </div>
+</section>

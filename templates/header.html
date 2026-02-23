@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AnimeVault — Ultra Premium{% endblock %}</title>
+    
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Playfair+Display:wght@700;900&display=swap');
+        
+        :root {
+            --primary: 139 92 246;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .glass-header {
+            backdrop-filter: blur(24px) saturate(200%);
+            background: rgba(10, 10, 10, 0.85);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 8px 32px -12px rgb(0 0 0 / 0.6);
+        }
+        
+        .logo-glow {
+            filter: drop-shadow(0 0 15px rgb(139 92 246 / 0.6));
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .logo-glow:hover {
+            filter: drop-shadow(0 0 25px rgb(139 92 246 / 0.9));
+            transform: scale(1.08) rotate(3deg);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(to right, rgb(139 92 246), rgb(236 72 153));
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .search-glass {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .search-glass:focus-within {
+            background: rgba(255,255,255,0.1);
+            border-color: rgb(139 92 246);
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
+        }
+        
+        .premium-btn {
+            background: linear-gradient(135deg, rgb(139 92 246), rgb(236 72 153), rgb(192 38 211));
+            box-shadow: 0 0 25px -5px rgb(139 92 246),
+                        0 0 10px -2px rgb(236 72 153);
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        
+        .premium-btn:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 0 40px -5px rgb(139 92 246),
+                        0 0 20px -2px rgb(236 72 153);
+        }
+        
+        .profile-glow {
+            border: 2px solid rgba(139, 92, 246, 0.5);
+            transition: all 0.4s ease;
+        }
+        
+        .profile-glow:hover {
+            border-color: rgb(139 92 246);
+            box-shadow: 0 0 30px rgb(139 92 246 / 0.6);
+        }
+        
+        /* Subtle body grain */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: url('https://picsum.photos/id/1015/1920/1080') repeat;
+            background-size: 300px;
+            opacity: 0.015;
+            z-index: -1;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgb(139 92 246);
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ultra Premium Header -->
+    <header class="glass-header fixed top-0 z-[999] w-full">
+        <div class="mx-auto flex max-w-[1480px] items-center justify-between px-6 py-5 lg:px-12">
+            
+            <!-- Logo -->
+            <div class="flex items-center gap-3 group cursor-pointer">
+                <div class="size-9 text-violet-500 logo-glow">
+                    <svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24 4L20 18L36 14L16 44L20 28L4 32L24 4Z" />
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-black tracking-[-0.04em] text-white italic bg-gradient-to-r from-white via-slate-200 to-white bg-clip-text text-transparent">
+                    {{ brend }}
+                </h1>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="hidden items-center gap-10 lg:flex">
+                <a href="{% url 'home' %}" class="nav-link text-sm font-semibold text-slate-200 hover:text-white">Bosh sahifa</a>
+                <a href="{% url 'animelar' %}" class="nav-link text-sm font-semibold text-slate-200 hover:text-white">Animelar</a>
+                <a href="#" class="nav-link text-sm font-semibold text-slate-200 hover:text-white">Trendlar</a>
+                <a href="#" class="nav-link text-sm font-semibold text-slate-200 hover:text-white">Yangilar</a>
+            </nav>
+
+            <!-- Right Side -->
+            <div class="flex items-center gap-6">
+                
+                <!-- Search -->
+                <div class="relative hidden max-w-md flex-1 md:block">
+                    <div class="search-glass flex items-center rounded-3xl px-5 py-3">
+                        <span class="material-symbols-outlined text-slate-400 text-2xl mr-3">search</span>
+                        <input 
+                            class="flex-1 bg-transparent text-sm outline-none placeholder:text-slate-400" 
+                            placeholder="Anime, qahramon, janr qidirish..." 
+                            type="text" 
+                        />
+                        <span class="material-symbols-outlined text-slate-400 text-xl cursor-pointer hover:text-white transition-colors">mic</span>
+                    </div>
+                </div>
+
+                <!-- Icons -->
+                <div class="flex items-center gap-3">
+                    <!-- Notifications -->
+                    <button class="relative flex size-11 items-center justify-center rounded-2xl bg-white/5 hover:bg-white/10 transition-all active:scale-95">
+                        <span class="material-symbols-outlined text-2xl">notifications</span>
+                        <div class="absolute top-1.5 right-1.5 size-4 rounded-full bg-red-500 flex items-center justify-center text-[10px] font-bold">3</div>
+                    </button>
+
+                    <!-- Premium Button -->
+                    <button onclick="window.location.href='#'"
+                        class="premium-btn hidden md:flex items-center gap-2 px-7 py-3 rounded-2xl text-sm font-bold uppercase tracking-widest text-white">
+                        <span class="material-symbols-outlined">diamond</span>
+                        Premium
+                    </button>
+
+                    <!-- Profile -->
+                    <div class="size-10 overflow-hidden rounded-2xl profile-glow cursor-pointer">
+                        <img alt="User Profile" class="h-full w-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCme7ZuunXGPR-n0ePsXn8lvA60dJIeT6FC56XYBmpwBLH3Mf8SndmMHY_M2kqbqlb1N4-5T3nyhJS-D-Z-sowbjtXA-ET10v5qXI00MdLVI1-0aa0JOkgXz2l0Nyy07jlxJTmAfofmCpRzQh3ahoRFhUpO_j_3mREG3ALjkI0SiDQtVssZZKzFpjInGJEY3Ea2w2ZdGz-PS1pldyCBr2jAWvayrNNxHeCtP-ApcncS40BDdYqfHWB6kbHgSaS7fUmaYV2judgsYr4" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-20 ">
+        <!-- {% block content %}{% endblock %} -->
+    </main>
+
+</body>
+</html>

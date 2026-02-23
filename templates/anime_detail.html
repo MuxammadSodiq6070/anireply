@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html class="dark" lang="uz">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Anireply - {{ anime.title }} | {{ current_episode.number }}-qism</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#256af4",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#0a0a0c",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer base { body { font-family: 'Space Grotesk', sans-serif; } }
+        .lightning-glow { box-shadow: 0 0 40px rgba(37,106,244,0.6), 0 0 80px rgba(37,106,244,0.25); border: 1px solid rgba(37,106,244,0.35); }
+        .electric-btn {
+            background: linear-gradient(90deg, #256af4, #60a5fa, #256af4);
+            background-size: 200% auto;
+            transition: 0.3s;
+        }
+        .electric-btn:hover { background-position: right center; box-shadow: 0 0 25px rgba(37,106,244,0.8); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #256af4; }
+    </style>
+
+    <!-- ULTRA PREMIUM PLAYER STYLES -->
+    <style>
+        .player-container {
+            background: #0a0a0a;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 16 / 9;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #000;
+        }
+
+        #player {
+            width: 100% !important;
+            height: 100% !important;
+            pointer-events: none;
+        }
+
+        .overlay-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110px;
+            height: 110px;
+            background: rgba(37, 106, 244, 0.15);
+            backdrop-filter: blur(20px);
+            border: 6px solid #fff;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 30;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 0 60px rgba(37, 106, 244, 0.7);
+            animation: pulse-blue 2.5s infinite;
+        }
+
+        @keyframes pulse-blue {
+
+            0%,
+            100% {
+                box-shadow: 0 0 60px rgba(37, 106, 244, 0.7);
+            }
+
+            50% {
+                box-shadow: 0 0 90px rgba(37, 106, 244, 0.4);
+            }
+        }
+
+        .overlay-play:hover {
+            transform: translate(-50%, -50%) scale(1.15);
+            background: rgba(37, 106, 244, 0.35);
+        }
+
+        .overlay-play span {
+            font-size: 52px;
+            color: #fff;
+            margin-left: 6px;
+        }
+
+        .controls-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 18px 24px;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.98), rgba(10, 10, 10, 0.6));
+            backdrop-filter: blur(24px);
+            z-index: 40;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .video-wrapper:hover .controls-bar,
+        .controls-bar:hover {
+            opacity: 1;
+        }
+
+        .btn {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 24px;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .btn:hover {
+            background: rgba(37, 106, 244, 0.25);
+            transform: scale(1.1);
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 9999px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border: 3px solid #256af4;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(37, 106, 244, 0.8);
+        }
+
+        .custom-scroll::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #256af4;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen overflow-x-hidden">
+
+    <!-- HEADER -->
+    <header
+        class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 lg:px-12 py-4">
+        <div class="max-w-[1600px] mx-auto flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3">
+                <span class="text-3xl">🎥</span>
+                <span class="text-2xl font-bold tracking-tighter">Anireply</span>
+            </a>
+            <nav class="flex items-center gap-8 text-sm font-medium">
+                <a href="/" class="hover:text-primary transition-colors">Bosh sahifa</a>
+                <a href="/animelar/" class="hover:text-primary transition-colors">Animelar</a>
+                <a href="#" class="hover:text-primary transition-colors">Manga</a>
+                <a href="#" class="hover:text-primary transition-colors">Yangiliklar</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                {% if user.is_authenticated %}
+                <span class="text-sm">{{ user.username }}</span>
+                <a href="/logout/" class="text-red-400 hover:text-red-500">Chiqish</a>
+                {% else %}
+                <a href="/login/" class="hover:text-primary">Kirish</a>
+                <a href="/register/" class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-semibold">Ro‘yxatdan
+                    o‘tish</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-[1600px] mx-auto p-4 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- CHAP TOMON – PLAYER + EPISODES -->
+        <div class="lg:col-span-9 flex flex-col gap-6">
+            <!-- PLAYER -->
+            <div class="relative lightning-glow rounded-2xl overflow-hidden bg-black aspect-video">
+                {% if current_episode and youtube_id %}
+                <div class="player-container">
+                    <div class="video-wrapper" id="videoWrapper">
+                        <div id="player"></div>
+                        <div class="overlay-play" id="overlayPlay">
+                            <span class="material-symbols-outlined">play_arrow</span>
+                        </div>
+                        <div class="controls-bar">
+                            <button id="playPauseBtn" class="btn"><span
+                                    class="material-symbols-outlined">play_arrow</span></button>
+                            <div class="seek-container flex-1">
+                                <input type="range" id="seekBar" min="0" max="100" value="0" class="slider w-full">
+                            </div>
+                            <div class="time"><span id="currentTime">0:00</span> / <span id="duration">0:00</span></div>
+                            <div class="flex items-center gap-4 ml-auto">
+                                <button id="muteBtn" class="btn"><span
+                                        class="material-symbols-outlined">volume_up</span></button>
+                                <input type="range" id="volumeSlider" min="0" max="100" value="85" class="slider w-28">
+                                <select id="playbackSpeed" class="control-select">
+                                    <option value="0.75">0.75×</option>
+                                    <option value="1" selected>1.0×</option>
+                                    <option value="1.25">1.25×</option>
+                                    <option value="1.5">1.5×</option>
+                                    <option value="1.75">1.75×</option>
+                                    <option value="2">2.0×</option>
+                                </select>
+                                <button id="pipBtn" class="btn"><span
+                                        class="material-symbols-outlined">picture_in_picture_alt</span></button>
+                                <button id="fullscreenBtn" class="btn"><span
+                                        class="material-symbols-outlined">fullscreen</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="w-full h-full flex items-center justify-center text-slate-400 text-2xl flex-col gap-3">
+                    <span class="material-symbols-outlined text-7xl">hide_source</span>
+                    <p>Video hali yuklanmagan</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- EPISODLAR RO‘YXATI -->
+            <div class="bg-slate-900/70 backdrop-blur-md rounded-2xl border border-slate-700 p-6">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary">playlist_play</span>
+                    Barcha qismlar ({{ episodes.count }} ta)
+                </h2>
+                <div
+                    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 max-h-[460px] overflow-y-auto custom-scroll pr-3">
+                    {% for episode in episodes %}
+                    <a href="{% url 'anime_episode' anime.pk episode.number %}" class="group block rounded-xl overflow-hidden border-2 transition-all hover:scale-105
+                          {% if episode == current_episode %} border-primary shadow-xl shadow-primary/40 bg-primary/10
+                          {% else %} border-transparent bg-slate-800/60 hover:border-slate-600 {% endif %}">
+                        <div class="aspect-video bg-black relative">
+                            {% if episode.image %}
+                            <img src="{{ episode.image }}" class="w-full h-full object-cover"
+                                alt="{{ episode.number }}-qism">
+                            {% endif %}
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-3">
+                                <span class="text-3xl font-bold text-white drop-shadow">{{ episode.number }}</span>
+                            </div>
+                        </div>
+                        <div class="p-3 text-center">
+                            <p class="text-sm line-clamp-2 font-medium">
+                                {{ episode.title|default:"—" }}
+                            </p>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- O‘NG SIDEBAR -->
+        <div class="lg:col-span-3 flex flex-col gap-6">
+            <!-- KEYINGI QISM -->
+            {% if next_episode %}
+            <div class="p-1 rounded-3xl bg-gradient-to-br from-primary to-blue-600 shadow-2xl shadow-primary/30">
+                <div class="bg-zinc-950 rounded-[22px] p-6">
+                    <h4 class="uppercase text-xs tracking-widest text-slate-400 mb-1">Keyingi qism</h4>
+                    <p class="text-xl font-bold mb-5">{{ next_episode.number }}-qism: {{ next_episode.title|default:"—"
+                        }}</p>
+                    <a href="{% url 'anime_episode' anime.pk next_episode.number %}"
+                        class="electric-btn w-full py-4 rounded-2xl text-white font-bold flex items-center justify-center gap-3 text-sm uppercase tracking-widest">
+                        <span class="material-symbols-outlined text-2xl">play_circle</span>
+                        DARHOL KO‘RISH
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- ANIME MA’LUMOTLARI -->
+            <div class="bg-slate-900/70 backdrop-blur-md rounded-2xl border border-slate-700 p-6">
+                <h3 class="font-bold text-xl mb-5">Anime haqida</h3>
+                <div class="space-y-5 text-sm">
+                    <div>
+                        <span class="text-slate-400 block">Nomi</span>
+                        <span class="font-semibold text-lg">{{ anime.title }}</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block">Janr</span>
+                        <span class="font-medium">{{ anime.genre }}</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block">Reyting</span>
+                        <span class="text-yellow-400 font-bold">{{ anime.rating }} ★</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block">Qismlar</span>
+                        <span class="font-medium">{{ anime.total_episodes }} ta</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block mb-1">Dublyaj holati</span>
+                        <div class="h-2.5 bg-slate-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-primary rounded-full transition-all"
+                                ></div>
+                        </div>
+                        <span class="text-xs text-slate-300 mt-1">{{ anime.dubbed_percentage }}% dublyaj qilingan</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950/60 py-10">
+        <div class="max-w-[1600px] mx-auto px-8 text-center text-xs text-slate-400">
+            © 2026 Anireply. Barcha huquqlar himoyalangan.
+        </div>
+    </footer>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        // Global o'zgaruvchilar
+        let player;
+        let isMuted = false;
+        let currentVolume = 85;
+
+        // DOM elementlari
+        const overlayPlay = document.getElementById('overlayPlay');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const seekBar = document.getElementById('seekBar');
+        const currentTime = document.getElementById('currentTime');
+        const duration = document.getElementById('duration');
+        const muteBtn = document.getElementById('muteBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const playbackSpeed = document.getElementById('playbackSpeed');
+        const pipBtn = document.getElementById('pipBtn');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+        // YouTube API yuklanganda
+        function onYouTubeIframeAPIReady() {
+            if (! '{{ youtube_id }}') {
+                console.warn("youtube_id topilmadi");
+                return;
+            }
+
+            player = new YT.Player('player', {
+                height: '100%',
+                width: '100%',
+                videoId: '{{ youtube_id }}',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'rel': 0,
+                    'modestbranding': 1,
+                    'fs': 1,
+                    'playsinline': 1
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // boshlang'ich volume
+            player.setVolume(currentVolume);
+            volumeSlider.value = currentVolume;
+
+            // durationni olish uchun biroz kutamiz
+            setTimeout(() => {
+                let dur = player.getDuration();
+                if (dur > 0) {
+                    duration.textContent = formatTime(dur);
+                    seekBar.max = dur;
+                }
+            }, 700);
+
+            // event listenerlar
+            overlayPlay?.addEventListener('click', togglePlayPause);
+            playPauseBtn?.addEventListener('click', togglePlayPause);
+
+            seekBar?.addEventListener('input', (e) => {
+                player.seekTo(e.target.value, true);
+            });
+
+            volumeSlider?.addEventListener('input', (e) => {
+                currentVolume = Number(e.target.value);
+                player.setVolume(currentVolume);
+                updateVolumeIcon();
+            });
+
+            muteBtn?.addEventListener('click', () => {
+                if (player.isMuted()) {
+                    player.unMute();
+                    volumeSlider.value = currentVolume;
+                } else {
+                    player.mute();
+                    volumeSlider.value = 0;
+                }
+                updateVolumeIcon();
+            });
+
+            playbackSpeed?.addEventListener('change', (e) => {
+                player.setPlaybackRate(Number(e.target.value));
+            });
+
+            pipBtn?.addEventListener('click', tryPictureInPicture);
+
+            fullscreenBtn?.addEventListener('click', toggleFullscreen);
+
+            // har 700-800ms da progress yangilash
+            setInterval(updatePlayerUI, 750);
+        }
+
+        function onPlayerStateChange(event) {
+            switch (event.data) {
+                case YT.PlayerState.PLAYING:
+                    playPauseBtn.querySelector('span').textContent = 'pause';
+                    overlayPlay.style.display = 'none';
+                    break;
+                case YT.PlayerState.PAUSED:
+                case YT.PlayerState.ENDED:
+                    playPauseBtn.querySelector('span').textContent = 'play_arrow';
+                    if (event.data === YT.PlayerState.ENDED) {
+                        overlayPlay.style.display = 'flex';
+                    }
+                    break;
+            }
+        }
+
+                // Video oynasini bosganda pause qilish
+        videoWrapper?.addEventListener('click', (e) => {
+            // Agar tugmalar ustiga bosilgan bo'lsa, e'tibor bermaymiz
+            if (e.target.closest('.btn') || e.target.closest('.controls-bar') || e.target.closest('select')) {
+                return;
+            }
+            
+            if (!player) return;
+            
+            if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                player.pauseVideo();
+                overlayPlay.style.display = 'flex';
+            } else {
+                player.playVideo();
+                overlayPlay.style.display = 'none';
+            }
+        });
+
+        function updatePlayerUI() {
+            if (!player) return;
+
+            let curr = player.getCurrentTime() || 0;
+            let dur = player.getDuration() || 0;
+
+            if (dur > 0) {
+                if (duration.textContent === '0:00') {
+                    duration.textContent = formatTime(dur);
+                    seekBar.max = dur;
+                }
+                seekBar.value = curr;
+                currentTime.textContent = formatTime(curr);
+            }
+        }
+                // Space tugmasi bilan play/pause (native YouTube kabi)
+        document.addEventListener('keydown', function(e) {
+            // Agar focus input yoki textarea da bo'lsa, space ni e'tiborsiz qoldiramiz
+            // (masalan komment yozayotganda video to'xtamasligi uchun)
+            const activeElement = document.activeElement;
+            const tag = activeElement.tagName.toLowerCase();
+            if (tag === 'input' || tag === 'textarea' || tag === 'select') {
+                return;
+            }
+
+            // Space bar = key " " yoki keyCode 32
+            if (e.code === 'Space' || e.key === ' ' || e.keyCode === 32) {
+                e.preventDefault();  // sahifa scroll bo'lmasligi uchun (muhim!)
+
+                if (!player) return;
+
+                const state = player.getPlayerState();
+
+                if (state === YT.PlayerState.PLAYING) {
+                    player.pauseVideo();
+                } else if (state === YT.PlayerState.PAUSED || state === YT.PlayerState.ENDED || state === -1) {
+                    player.playVideo();
+                }
+                // boshqa holatlarda (buffering va h.k.) hech narsa qilmaymiz
+            }
+        }); 
+
+        function formatTime(seconds) {
+            let min = Math.floor(seconds / 60);
+            let sec = Math.floor(seconds % 60);
+            return min + ':' + (sec < 10 ? '0' : '') + sec;
+        }
+
+        function updateVolumeIcon() {
+            let vol = player.getVolume();
+            let icon = muteBtn.querySelector('span');
+
+            if (player.isMuted() || vol === 0) {
+                icon.textContent = 'volume_off';
+            } else if (vol < 35) {
+                icon.textContent = 'volume_down';
+            } else {
+                icon.textContent = 'volume_up';
+            }
+        }
+
+        function tryPictureInPicture() {
+            const iframe = document.querySelector('#videoWrapper iframe');
+            if (!iframe) return;
+
+            if (document.pictureInPictureElement) {
+                document.exitPictureInPicture().catch(() => { });
+            } else if (iframe.requestPictureInPicture) {
+                iframe.requestPictureInPicture().catch(err => {
+                    console.warn("PiP ishlamadi:", err);
+                });
+            }
+        }
+
+        function toggleFullscreen() {
+            const wrapper = document.getElementById('videoWrapper');
+            if (!wrapper) return;
+
+            if (!document.fullscreenElement) {
+                wrapper.requestFullscreen().catch(err => {
+                    console.warn("Fullscreen ishlamadi:", err);
+                });
+            } else {
+                document.exitFullscreen().catch(() => { });
+            }
+        }
+
+                // Arrow keys bilan 10 soniya oldinga/orqaga o'tkazish
+        document.addEventListener('keydown', function(e) {
+            // Input/textarea da bo'lsa e'tibor bermaymiz
+            const active = document.activeElement;
+            const tag = active.tagName.toLowerCase();
+            if (tag === 'input' || tag === 'textarea' || tag === 'select') {
+                return;
+            }
+
+            if (!player) return;
+
+            // O'ng strelka → +10 soniya
+            if (e.code === 'ArrowRight' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                const current = player.getCurrentTime() || 0;
+                player.seekTo(current + 10, true);
+            }
+
+            // Chap strelka → -10 soniya
+            if (e.code === 'ArrowLeft' || e.key === 'ArrowLeft') {
+                e.preventDefault();
+                const current = player.getCurrentTime() || 0;
+                player.seekTo(Math.max(0, current - 10), true);  // 0 dan pastga tushmasin
+            }
+        });
+    </script>А
+</body>
+
+</html>

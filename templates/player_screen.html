@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html class="dark" lang="uz">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Anireply - Anime Ko'rish Sahifasi</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#256af4",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#0a0a0c",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body { font-family: 'Space Grotesk', sans-serif; }
+        }
+        .lightning-glow {
+            box-shadow: 0 0 30px rgba(37, 106, 244, 0.5), 0 0 60px rgba(37, 106, 244, 0.2);
+            border: 1px solid rgba(37, 106, 244, 0.3);
+        }
+        .electric-btn {
+            background: linear-gradient(90deg, #256af4, #60a5fa, #256af4);
+            background-size: 200% auto;
+            transition: 0.3s;
+        }
+        .electric-btn:hover {
+            background-position: right center;
+            box-shadow: 0 0 20px rgba(37, 106, 244, 0.7);
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #256af4; }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen overflow-x-hidden">
+    <header
+        class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 lg:px-12 py-3">
+        <div class="max-w-[1600px] mx-auto flex items-center justify-between gap-8">
+            <div class="flex items-center gap-10">
+                <div class="flex items-center gap-3 text-primary">
+                    <span class="material-symbols-outlined text-3xl font-bold">bolt</span>
+                    <h1 class="text-2xl font-bold tracking-tighter text-slate-900 dark:text-white uppercase italic">
+                        Anireply</h1>
+                </div>
+                <nav class="hidden md:flex items-center gap-8">
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Katalog</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Fasllar</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Filmlar</a>
+                    <a class="text-primary font-bold text-sm" href="#">Tomosha qilish</a>
+                </nav>
+            </div>
+            <div class="flex-1 max-w-md hidden lg:block">
+                <div class="relative group">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+                    <input
+                        class="w-full bg-slate-100 dark:bg-slate-900 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 transition-all outline-none"
+                        placeholder="Sevimli animengizni qidiring..." type="text" />
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="p-2 rounded-lg bg-slate-100 dark:bg-slate-900 hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <button class="p-2 rounded-lg bg-slate-100 dark:bg-slate-900 hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined">settings</span>
+                </button>
+                <div
+                    class="w-10 h-10 rounded-full bg-primary/20 border-2 border-primary/40 flex items-center justify-center overflow-hidden">
+                    <img alt="User Profile" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVdjija51hLy1AVYHkO4Ps_3f_eiAusEj5KvdQtsjW-pLI00jNj5lZwgw2t3bzsDfHSoL0i1rRaoct5nEqIgMLqDX41O0Umft4UMWeWezald4hTRSFgFi0WxxnsijBJPltHxqZ_TWEl9u-sLuMajaTIDeoh-HsmIEDJ2dkXki0n7u4psa51YB0UFdhVGt67zCXkMW--sYJzcG7tetHfZ-qIS-AiiSW_QeT-QQiR5yJLzNU5QPwrcYeGRbgt_ubWAuMVZ-a3v5USV4" />
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-[1600px] mx-auto p-4 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-9 flex flex-col gap-6">
+            <div class="relative lightning-glow rounded-xl overflow-hidden bg-black aspect-video group">
+                <div class="absolute inset-0 bg-cover bg-center"
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBICqoVzLd5NBegqGLr5ZxqDgGT1okAI3vh_TX5JrnGC1kT17IqnVw7OxfD6kE8J0kQkn32GI7LRWpMDBm-dSQokLRO3EjootQEJrs0eE6Q1D_BJJ8iRLDsmeMPRtRSNeToakCNu1kdycMHxG99UcpRD7RYmQ9Lv8o5qpjUlUMX6uowH0dLnPwAV0XN28yTyJ4EdCnYVPSBvkMZRM41MnQkPQVv3Zyv9KyMg6psNCepAGAyvjGu51u2i92qWcR5NWzPLyKd63u5HPE');">
+                    <div class="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <button
+                        class="w-20 h-20 rounded-full bg-primary/90 text-white flex items-center justify-center hover:scale-110 transition-transform shadow-[0_0_30px_rgba(37,106,244,0.6)]">
+                        <span class="material-symbols-outlined text-5xl translate-x-1">play_arrow</span>
+                    </button>
+                </div>
+                <div
+                    class="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="relative w-full h-1 bg-white/20 rounded-full cursor-pointer group/progress">
+                        <div class="absolute top-0 left-0 h-full w-[65%] bg-primary rounded-full relative">
+                            <div
+                                class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full scale-0 group-hover/progress:scale-100 transition-transform shadow-[0_0_10px_rgba(37,106,244,1)]">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between text-white">
+                        <div class="flex items-center gap-6">
+                            <span
+                                class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors text-2xl">play_arrow</span>
+                            <span
+                                class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors text-2xl">skip_next</span>
+                            <span
+                                class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors text-2xl">volume_up</span>
+                            <span class="text-xs font-medium tracking-widest font-display">24:12 / 24:40</span>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <span
+                                class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors text-2xl">closed_caption</span>
+                            <span
+                                class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors text-2xl">settings</span>
+                            <span
+                                class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors text-2xl">fullscreen</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div class="space-y-2">
+                    <div class="flex items-center gap-3">
+                        <span
+                            class="px-2 py-0.5 rounded text-[10px] font-bold bg-primary text-white uppercase tracking-widest">12-qism</span>
+                        <span class="text-slate-400 text-sm font-medium">1-fasl Finali</span>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-black tracking-tight dark:text-white uppercase italic">Solo
+                        Leveling - <span class="text-primary">Uyg'onish</span></h2>
+                    <p class="text-slate-500 dark:text-slate-400 max-w-2xl text-sm leading-relaxed">
+                        Kasb o'zgartirish kvestidagi eng katta sinovdan so'ng, Jinwoo yangi, g'oyat qudratli kuchga ega
+                        bo'lish uchun o'tmishdagi zaifliklarini yengishi kerak. Soyalar o'z qirolini kutmoqda.
+                    </p>
+                </div>
+                <div class="flex items-center gap-3 shrink-0">
+                    <button
+                        class="flex flex-col items-center justify-center p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-colors group">
+                        <span class="material-symbols-outlined text-slate-400 group-hover:text-primary">thumb_up</span>
+                        <span class="text-[10px] font-bold mt-1">12K</span>
+                    </button>
+                    <button
+                        class="flex flex-col items-center justify-center p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-colors group">
+                        <span class="material-symbols-outlined text-slate-400 group-hover:text-primary">bookmark</span>
+                        <span class="text-[10px] font-bold mt-1">RO'YXAT</span>
+                    </button>
+                    <button
+                        class="flex flex-col items-center justify-center p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-colors group">
+                        <span class="material-symbols-outlined text-slate-400 group-hover:text-primary">share</span>
+                        <span class="text-[10px] font-bold mt-1">ULASHISH</span>
+                    </button>
+                </div>
+            </div>
+            <hr class="border-slate-200 dark:border-slate-800" />
+            <div class="space-y-6">
+                <h3 class="text-xl font-bold flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">chat_bubble</span>
+                    Fikrlar <span class="text-slate-400 text-sm font-normal">(1,248)</span>
+                </h3>
+                <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-full bg-slate-800 shrink-0">
+                        <img alt="User" class="w-full h-full rounded-full"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuALVKL8nEIQ6fnHJS9f-FriIK35Pwhz77XZAnK9vbGUy8anoTJDMNgWAhh5og8wdDtAVgNs9u_d7AEWFgB33bFaw3iTlJyug_HdTDgYNSB3Cx8lTUB2uNI9wHLT91C_OmJygF2EFEA0doDNuhiUXkESbii8jPDhfAQA6MC3k4RUQUL1l3a41aYf2Q7Jt9i7wlYKCU4Cs96qjfE2J5SwTmNrYrWx0r_j9PINTt77CJoZs32C4Xzv7enwb-IiBRxHpuL_Ldm8oxj9fKQ" />
+                    </div>
+                    <div class="flex-1">
+                        <textarea
+                            class="w-full bg-transparent border-b border-slate-200 dark:border-slate-800 focus:border-primary transition-colors py-2 outline-none resize-none h-12"
+                            placeholder="Fikr qoldiring..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="lg:col-span-3 flex flex-col gap-6">
+            <div
+                class="p-1 rounded-xl bg-gradient-to-br from-primary to-blue-300 shadow-xl shadow-primary/20 overflow-hidden">
+                <div class="bg-background-dark p-4 rounded-lg flex flex-col gap-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-bold text-primary tracking-widest uppercase">Navbatdagi</span>
+                        <span class="text-[10px] font-medium text-slate-500 italic">23:59 qoldi</span>
+                    </div>
+                    <div class="relative aspect-video rounded-lg overflow-hidden group">
+                        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI8ycUVUcUEeuvxuO3af9shbCkaKL5twCRFQtPVKG-Aghv0KHHQiiPtgGDzmuh2y9989snaQa7cI6-HWK9_6yxgStOLybGRvoPkjlxb9S88FPgpqgBvR9ZSPlCVhOWjYNMrduyrAZGmjYm6oDFa8kPhbcNj-0WmxeobzJBiyo69r_Njms23ERIvCTk28T6xW2LJ09VB8UUxkW6o793p-apUwdx-0ZxcizN-ArLo1ZF6mNonbfWf4jXbT7s7EEDYms8sZxkTSHgmRs" />
+                        <div class="absolute inset-0 bg-primary/20 mix-blend-overlay"></div>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="font-bold text-white uppercase italic text-sm">13-qism: Monarx</h4>
+                        <p class="text-slate-500 text-xs">2 kundan keyin premiera</p>
+                    </div>
+                    <button
+                        class="electric-btn w-full py-3 rounded-lg text-white font-bold text-sm flex items-center justify-center gap-2 uppercase tracking-widest">
+                        <span class="material-symbols-outlined text-xl">electric_bolt</span>
+                        Keyingi qism
+                    </button>
+                </div>
+            </div>
+            <div class="flex flex-col gap-4">
+                <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
+                    <h3 class="font-bold uppercase italic text-primary">Qismlarni tanlash</h3>
+                    <div class="flex gap-2">
+                        <button class="p-1 text-slate-400 hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-xl">sort</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-3 max-h-[600px] overflow-y-auto pr-2">
+                    <div class="flex gap-3 p-2 rounded-lg bg-primary/10 border border-primary/30 group cursor-pointer">
+                        <div class="relative w-32 h-20 shrink-0 rounded overflow-hidden">
+                            <img class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgI7R_N3gin9hQMEwMT3dL4TUKaaHvjNDiX2tqLjUZrSBmt4Y_ztp4tczcgAk7zmAofkuqUNnoqM7ikDZicDb84NMN-das1j9Yf5S8GyQ5xfcP-y-lIJF56wYCdyXU_Pm5SjdUf9vrSVvuiCmM5GjxJa-Kn5cIyrFvDR9Yq794iqgG5C34GvHvuxKIzdWM1voNXWDDWwQVTyTLKD830-v5Etuq31y5I2-fxULYdtgpwGardwRHyZcHRr9uv_vDPGIogVcCm27lfG0" />
+                            <div class="absolute inset-0 bg-primary/40 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-white">play_arrow</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center min-w-0">
+                            <h5 class="text-sm font-bold truncate text-primary uppercase italic">12-qism: Uyg'onish</h5>
+                            <p class="text-[10px] text-slate-400">Hozir ko'rilmoqda</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-900 border border-transparent transition-all group cursor-pointer">
+                        <div class="relative w-32 h-20 shrink-0 rounded overflow-hidden">
+                            <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_yJjN6GfVdtHhidgsxgggT3ntKF34eezU0o8CwuTh2dfPTzDrUWuZktalkeawOjgNXZ3SnZzCMxCbxfFGdhm27KNs1FAdTGNpG87f4BIuhiCiHa95Pf7Y8NsHNpjotpLZX_8lRAjxOfICy5K523PgnlqvA1dDUXZttFlm0DFwPogGHGsI-fdkkjFyINzpkWkayIbygPPRdkvInwvq-xwVpPrDsijzjqwdU-O0o1rqquuYZ_knma3_y9QWC5FzpsJIql45SLBYbq8" />
+                            <div class="absolute bottom-0 left-0 h-1 w-full bg-slate-700">
+                                <div class="bg-primary h-full w-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center min-w-0">
+                            <h5
+                                class="text-sm font-bold truncate dark:text-slate-300 group-hover:text-primary transition-colors uppercase italic">
+                                11-qism: Zulmat</h5>
+                            <p class="text-[10px] text-slate-500">100% ko'rildi</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-900 border border-transparent transition-all group cursor-pointer">
+                        <div class="relative w-32 h-20 shrink-0 rounded overflow-hidden">
+                            <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzXj8W5b5e63nkE8qw5ZRkjPcUKRTlzfw-mjmdnWPBF6Myivs2Q2ZXESYDL9AI3AQZJr3uiTwMsmvXPAKGPNoOEBJr6Ws34KwaUga7sSDUHW19qHpKHf4ZMOUGyND8cpTV_0BD-0KEuPFdnOPQb5u8XbtLMm824iB6rqvTvPf-CN1mLhVVtJcj9d3aOF1GVvaFGdZLIr9gmkj5AhnnghDPvdVxb8rrRVag4WiVT-wxGm7vjUtiEUZkgo_oppUsY6pfllb3mYia8Os" />
+                            <div class="absolute bottom-0 left-0 h-1 w-full bg-slate-700">
+                                <div class="bg-primary h-full w-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center min-w-0">
+                            <h5
+                                class="text-sm font-bold truncate dark:text-slate-300 group-hover:text-primary transition-colors uppercase italic">
+                                10-qism: Zindon</h5>
+                            <p class="text-[10px] text-slate-500">100% ko'rildi</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-900 border border-transparent transition-all group cursor-pointer">
+                        <div class="relative w-32 h-20 shrink-0 rounded overflow-hidden">
+                            <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-2VwbzPP6DwgSEX6_URzQYanu46l_LjYQPIfsJnulCmqRV3P-q4aJ2_0URqe7Dn_VEfpOro7kcRfkqbCc7UXMPZRvkH1k2cg6_G7ERUwMUU5G3BOGz6hnO530bTxxIohbu1WadSQRMyhD-__SRvV2BpYLg3cj4R1lWMCq4Wx-cA4lCeg59DpKlNb-5Nyfhgmin-bj1nOxzwvM6iUNgFHV8hbGY2xauFb5sDGykWKIqlVg9bCv_Z4dD9tKqV-Mo4GX6unYr9XyCm4" />
+                            <div class="absolute bottom-0 left-0 h-1 w-full bg-slate-700">
+                                <div class="bg-primary h-full w-[40%]"></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center min-w-0">
+                            <h5
+                                class="text-sm font-bold truncate dark:text-slate-300 group-hover:text-primary transition-colors uppercase italic">
+                                09-qism: Soyalar</h5>
+                            <p class="text-[10px] text-slate-500">40% ko'rildi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative rounded-xl overflow-hidden bg-slate-900 aspect-square group cursor-pointer">
+                <img class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhlCAnqoLEprMWXd2RQzjXga8KJwATV3-joGtSvuR9OltZxjg-cO5zeGGbdeZC-TCUUq_OWi27ZB2k0uUc93ZnyBHrjV2lvjjhgILs0b1BP6Yz5UnyLQnaS4sbN3Suuim1_M5sTXnMN1tgitCHZjMvC1OhWtYQ0xJucN5jP5b4qXPKKZ20Td9SjiEF_tVM-4QG70jyia5jqUZxXUL_9aFCYp7mmgJ4qKBKRIZgi5gycxDvyGv9BkxoMb7LkTmta0VT6pj2hOdNiEw" />
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent p-4 flex flex-col justify-end">
+                    <p class="text-xs font-bold text-primary tracking-widest uppercase">Maxsus film</p>
+                    <h4 class="text-lg font-black text-white leading-tight uppercase italic">Birinchi Ovchi <br />Kino
+                        Tadbiri</h4>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950/50 py-8">
+        <div class="max-w-[1600px] mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2 text-primary">
+                <span class="material-symbols-outlined font-bold">bolt</span>
+                <span class="font-bold tracking-tighter uppercase italic">Anireply</span>
+            </div>
+            <div class="flex gap-8 text-xs font-medium text-slate-500 uppercase tracking-widest">
+                <a class="hover:text-primary transition-colors" href="#">Qoidalar</a>
+                <a class="hover:text-primary transition-colors" href="#">Maxfiylik</a>
+                <a class="hover:text-primary transition-colors" href="#">Discord</a>
+                <a class="hover:text-primary transition-colors" href="#">Aloqa</a>
+            </div>
+            <p class="text-[10px] text-slate-600 uppercase tracking-widest">© 2024 Anireply Streaming Inc.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

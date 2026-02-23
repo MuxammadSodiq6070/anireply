@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html class="dark" lang="uz">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Zenith Login - Ultra Premium</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#256af4",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#0a0c12",
+                    },
+                    fontFamily: { "display": ["Space Grotesk", "sans-serif"] },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    boxShadow: {
+                        'glow': '0 0 15px -3px rgba(37, 106, 244, 0.5), 0 0 6px -2px rgba(37, 106, 244, 0.5)',
+                        'aura': '0 0 25px 0px rgba(37, 106, 244, 0.6)',
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        body { font-family: "Space Grotesk", sans-serif; }
+        .glass-panel {
+            background: rgba(16, 22, 34, 0.65);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .lightning-bg {
+            background-image: linear-gradient(to bottom, rgba(10, 12, 18, 0.7), rgba(10, 12, 18, 0.9));
+            background-size: cover;
+            background-position: center;
+        }
+        .input-glow:focus { box-shadow: 0 0 15px rgba(37, 106, 244, 0.3); border-color: #256af4; }
+    </style>
+</head>
+
+<body class="bg-background-dark text-slate-100 min-h-screen flex flex-col font-display">
+    <div class="fixed inset-0 z-0 lightning-bg"></div>
+
+    <main class="relative z-10 flex-1 flex items-center justify-center px-4 py-12">
+        <div class="w-full max-w-[420px]">
+            <div class="glass-panel rounded-xl p-8 shadow-2xl relative">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-bold text-white mb-2">Xush kelibsiz</h1>
+                    <p class="text-slate-400 text-sm">Vazifalaringizni boshqarish uchun tizimga kiring</p>
+                </div>
+                <form class="space-y-6" method="POST">
+                    {% csrf_token %}
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Foydalanuvchi nomi</label>
+                        <div class="relative">
+                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xl">person_outline</span>
+                            <input name="username" type="text" placeholder="Masalan: Testbola"
+                                class="w-full bg-slate-900/50 border border-slate-800 rounded-lg py-4 pl-12 pr-4 text-white placeholder:text-slate-600 focus:outline-none input-glow" required />
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center ml-1">
+                            <label class="text-xs font-bold uppercase tracking-widest text-slate-500">Parol</label>
+                            <a href="#" class="text-xs font-bold text-primary hover:underline uppercase">Parolni unutdingizmi?</a>
+                        </div>
+                        <div class="relative">
+                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xl">lock_open</span>
+                            <input name="password" type="password" placeholder="••••••••"
+                                class="w-full bg-slate-900/50 border border-slate-800 rounded-lg py-4 pl-12 pr-4 text-white placeholder:text-slate-600 focus:outline-none input-glow" required />
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 ml-1 pt-2">
+                        <input type="checkbox" id="remember" class="size-5 rounded border-slate-800 bg-slate-900/50 text-primary" />
+                        <label for="remember" class="text-sm font-medium text-slate-400 cursor-pointer select-none">Eslab qolish</label>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-lg shadow-aura transition-all flex items-center justify-center gap-2">
+                        <span>HAMJAMIYATGA QO'SHILING</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </button>
+                </form>
+                <div class="mt-10 text-center text-slate-500 text-sm">
+                    Hisobingiz yo'qmi? 
+                    <a href="{% url 'register' %}" class="text-primary font-bold hover:underline ml-1">Ro'yxatdan o'tish</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

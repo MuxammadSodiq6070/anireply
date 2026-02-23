@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html class="dark" lang="uz">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Anireply | Anime Qidiruvi va Filtrlar</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#256af4",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#0a0c12",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        .glass-panel {
+            background: rgba(16, 22, 34, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(37, 106, 244, 0.1);
+        }
+        .neon-glow:hover {
+            box-shadow: 0 0 20px rgba(37, 106, 244, 0.4);
+            border-color: rgba(37, 106, 244, 0.6);
+        }
+        .lightning-text {
+            text-shadow: 0 0 10px rgba(37, 106, 244, 0.8);
+        }
+        body {
+            scrollbar-width: thin;
+            scrollbar-color: #256af4 #0a0c12;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 selection:bg-primary selection:text-white">
+    <header class="sticky top-0 z-50 glass-panel border-b border-primary/20">
+        <div class="max-w-[1600px] mx-auto px-6 h-20 flex items-center justify-between gap-8">
+            <div class="flex items-center gap-3 shrink-0">
+                <div class="bg-primary p-1.5 rounded-lg shadow-[0_0_15px_rgba(37,106,244,0.5)]">
+                    <span class="material-symbols-outlined text-white text-2xl">bolt</span>
+                </div>
+                <h1 class="text-2xl font-bold tracking-tight text-white">Anireply</h1>
+            </div>
+            <div class="flex-1 max-w-2xl">
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <span
+                            class="material-symbols-outlined text-primary group-focus-within:animate-pulse">bolt</span>
+                    </div>
+                    <input
+                        class="w-full bg-slate-800/50 border border-slate-700 focus:border-primary focus:ring-1 focus:ring-primary rounded-xl py-2.5 pl-12 pr-4 text-slate-100 placeholder-slate-500 transition-all duration-300"
+                        placeholder="Anime qidirish..." type="text" />
+                    <div class="absolute inset-y-0 right-4 flex items-center gap-2">
+                        <span
+                            class="text-[10px] font-bold px-1.5 py-0.5 rounded border border-slate-600 text-slate-500 uppercase tracking-tighter">Qidiruv</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="hidden lg:flex items-center gap-8">
+                <a class="text-slate-400 hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wider"
+                    href="#">Asosiy</a>
+                <a class="text-primary transition-colors text-sm font-semibold uppercase tracking-wider"
+                    href="#">Qidiruv</a>
+                <a class="text-slate-400 hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wider"
+                    href="#">Trenddagilar</a>
+                <a class="text-slate-400 hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wider"
+                    href="#">Kutubxona</a>
+            </nav>
+            <div class="flex items-center gap-4 shrink-0">
+                <button class="p-2 text-slate-400 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <div
+                    class="h-10 w-10 rounded-full border-2 border-primary/50 overflow-hidden cursor-pointer hover:border-primary transition-all shadow-[0_0_10px_rgba(37,106,244,0.2)]">
+                    <img alt="Foydalanuvchi profili" class="h-full w-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtH0daYPsLHfLK237Za_9n6aua-x9DYp0FGP2XQs61VmV01kX6Aya2eCm8fTQ6e6pkt627EL1WFUVmpRcMvOfeicY3V9NgYjxnrt2cvCKBx-5MxlIUdb7W5_6VcV6eW7wre8_roeuW4mx1qesuKrWPJJRX2kQTGLkLcMftgdaA-DUMrUXv9rqI41Q9Xcgg5aSCRY9g6cRPIowTG_zB5yjCjOJ4Ss3kukWC0eh3Tu2gjyvz5QhEQiiRFcbQWYniuagzgnm0_nTjG_E" />
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-[1600px] mx-auto px-6 py-8 flex gap-8">
+        <aside class="w-72 shrink-0 hidden xl:block">
+            <div class="sticky top-28 space-y-8">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-bold flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">tune</span>
+                        Filtrlar
+                    </h2>
+                    <button class="text-xs text-primary font-bold hover:underline">Tozalash</button>
+                </div>
+                <div class="space-y-6">
+                    <div class="space-y-3">
+                        <label class="text-sm font-bold text-slate-400 uppercase tracking-widest">Janrlar</label>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1.5 rounded-lg bg-primary text-white text-xs font-semibold cursor-pointer">Ekshn</span>
+                            <span
+                                class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-400 hover:bg-slate-700 text-xs font-semibold cursor-pointer transition-colors">Skay-fay</span>
+                            <span
+                                class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-400 hover:bg-slate-700 text-xs font-semibold cursor-pointer transition-colors">Seinen</span>
+                            <span
+                                class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-400 hover:bg-slate-700 text-xs font-semibold cursor-pointer transition-colors">Mexa</span>
+                            <span
+                                class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-400 hover:bg-slate-700 text-xs font-semibold cursor-pointer transition-colors">Kiberpank</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="text-sm font-bold text-slate-400 uppercase tracking-widest">Studio</label>
+                        <select
+                            class="w-full bg-slate-800 border-none rounded-lg text-sm text-slate-300 focus:ring-1 focus:ring-primary">
+                            <option>MAPPA</option>
+                            <option>Ufotable</option>
+                            <option>Madhouse</option>
+                            <option>Studio Ghibli</option>
+                            <option>Wit Studio</option>
+                        </select>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <label class="text-sm font-bold text-slate-400 uppercase tracking-widest">Yil</label>
+                            <span class="text-xs text-primary font-mono">1998 - 2026</span>
+                        </div>
+                        <div class="relative h-1 bg-slate-800 rounded-full mt-4">
+                            <div class="absolute left-1/4 right-0 h-1 bg-primary rounded-full"></div>
+                            <div
+                                class="absolute left-1/4 -top-1.5 h-4 w-4 bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,0.5)] cursor-pointer">
+                            </div>
+                            <div
+                                class="absolute right-0 -top-1.5 h-4 w-4 bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,0.5)] cursor-pointer">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="text-sm font-bold text-slate-400 uppercase tracking-widest">Qismlar</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button
+                                class="p-2 text-xs font-bold border border-slate-700 rounded hover:border-primary transition-colors">1-12</button>
+                            <button
+                                class="p-2 text-xs font-bold border border-slate-700 rounded hover:border-primary transition-colors">13-24</button>
+                            <button
+                                class="p-2 text-xs font-bold border border-primary bg-primary/10 text-primary rounded">25-50</button>
+                            <button
+                                class="p-2 text-xs font-bold border border-slate-700 rounded hover:border-primary transition-colors">50+</button>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="text-sm font-bold text-slate-400 uppercase tracking-widest">Reyting (Min.)</label>
+                        <div class="flex gap-1">
+                            <span class="material-symbols-outlined text-primary fill-1">star</span>
+                            <span class="material-symbols-outlined text-primary fill-1">star</span>
+                            <span class="material-symbols-outlined text-primary fill-1">star</span>
+                            <span class="material-symbols-outlined text-primary fill-1">star</span>
+                            <span class="material-symbols-outlined text-slate-700">star</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="p-4 rounded-xl bg-gradient-to-br from-primary/20 to-transparent border border-primary/30 mt-10">
+                    <p class="text-xs font-bold text-primary mb-1 uppercase tracking-tighter">Premium Obuna</p>
+                    <p class="text-sm text-slate-300 leading-tight">4K sifat va reklamasiz tomoshadan bahra oling.</p>
+                    <button
+                        class="mt-3 w-full py-2 bg-primary text-white text-xs font-bold rounded-lg hover:scale-[1.02] transition-transform uppercase">Obunani
+                        Yangilash</button>
+                </div>
+            </div>
+        </aside>
+        <section class="flex-1">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-white mb-2">Anime Qidiruvi</h2>
+                    <p class="text-slate-400">2026-yilgi raqamli arxivimizdan o'zingizga yoqqan animeni toping.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-sm text-slate-500">Saralash:</span>
+                    <button
+                        class="flex items-center gap-2 bg-slate-800/50 px-4 py-2 rounded-lg text-sm font-semibold hover:text-primary transition-colors">
+                        Eng mos keladiganlar
+                        <span class="material-symbols-outlined text-sm">expand_more</span>
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="group relative flex flex-col space-y-3 cursor-pointer">
+                    <div
+                        class="relative aspect-[2/3] overflow-hidden rounded-xl border border-slate-800 transition-all duration-500 neon-glow">
+                        <img alt="Futuristik kiberqiz"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpa3EnSDr3D1lu66OQh2qSxCCO8RdLnZeUIoTznOAO4jplva7jwzqou-gCDN4Ul4MONvHRUyojsdYtJxv9TcV-2lSuYNOCJ0_1INW_4zr2iYB6wmQ_1lBLSrdGWZqr4A9VzVZatz7sJ8oXvVREAV_CmmQ1WOQrxplFIOaHOhu0Rm6MvmsEzU3cFB9cszVQoC1CwgtbKs8lSySPCKXZHOxIWP6FoyYa5g6jCFKl_y-lTtTv0uP8t1VSoZ2nF33N1EUz60-e28KkF24" />
+                        <div class="absolute top-3 left-3 flex flex-col gap-2">
+                            <span
+                                class="px-2 py-1 bg-primary text-white text-[10px] font-bold rounded shadow-lg uppercase">Original</span>
+                            <span
+                                class="px-2 py-1 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold rounded shadow-lg uppercase">4K
+                                HDR</span>
+                        </div>
+                        <div
+                            class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black via-black/40 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <button
+                                class="w-full py-2 bg-white text-black font-bold text-sm rounded-lg hover:bg-primary hover:text-white transition-colors flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-sm">play_arrow</span>
+                                Ko'rish
+                            </button>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3
+                            class="font-bold text-slate-100 group-hover:text-primary transition-colors truncate uppercase">
+                            Cyberpulse: Regenesis</h3>
+                        <div class="flex items-center justify-between text-xs text-slate-500">
+                            <span>Studio MAPPA</span>
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px] text-yellow-500 fill-1">star</span>
+                                <span class="text-slate-200 font-bold">9.2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="group relative flex flex-col space-y-3 cursor-pointer">
+                    <div
+                        class="relative aspect-[2/3] overflow-hidden rounded-xl border border-slate-800 transition-all duration-500 neon-glow">
+                        <img alt="Samuray"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1hV5dr_-x1EEwdRkHPj63IyGrZAK9cU2R_ZEhHVMww81sM9QTaIY8uoKEvhsCWoGoqozpNG3Og4ZMOXJeZz_K3Qn3xaP7_rePZ1ZQYcANnp8wvhMltQTQfi5bs6aSW6DU8BmGwKga2IUWpTfvcPojG_T56WQO7lzI2BsV-P4xG27j1WFhwqwa9SvGBjJ3B8H2lkN6JDDC66PCtDpRfwPrODHdECSfRUaBhqr4pdkDjTmuIYOjuuV13ZMv2YfbKzb4C1zcSL_g1MA" />
+                        <div class="absolute top-3 left-3">
+                            <span
+                                class="px-2 py-1 bg-slate-900/80 backdrop-blur text-white text-[10px] font-bold rounded shadow-lg uppercase">Trendda</span>
+                        </div>
+                        <div
+                            class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black via-black/40 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <button
+                                class="w-full py-2 bg-white text-black font-bold text-sm rounded-lg hover:bg-primary hover:text-white transition-colors flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-sm">play_arrow</span>
+                                Ko'rish
+                            </button>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3
+                            class="font-bold text-slate-100 group-hover:text-primary transition-colors truncate uppercase">
+                            Azure Blade Chronicles</h3>
+                        <div class="flex items-center justify-between text-xs text-slate-500">
+                            <span>Studio Ufotable</span>
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px] text-yellow-500 fill-1">star</span>
+                                <span class="text-slate-200 font-bold">8.8</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="group relative flex flex-col space-y-3 cursor-pointer">
+                    <div
+                        class="relative aspect-[2/3] overflow-hidden rounded-xl border border-slate-800 transition-all duration-500 neon-glow">
+                        <img alt="Abstrakt qahramon"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHoZSV-vVYUDLk3HJ9ne352zA5b-zsuB92NCapfIkQ-CofO0tPhC7BePXxS_UsH0wLpwWfD1fERd-lDsyeVx_WS0ZsHEaCFWJQcMCm0Mzemwk6NMvT7BwyWlq3fkBEJlo0PyJOXyqDG7WtEHnsD1bg3MxGTs5oBzjTW-9yTiEMMO7NVo8INec3VnLVh7qH-4lWK_j9nXIzsVrb63hq00FSXwqkY7jIGtV88U1cBqMHpgawIGTHjmnJHWeRA7Y6zSGOSAiaxmOi-yc" />
+                        <div
+                            class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black via-black/40 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <button
+                                class="w-full py-2 bg-white text-black font-bold text-sm rounded-lg hover:bg-primary hover:text-white transition-colors flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-sm">play_arrow</span>
+                                Ko'rish
+                            </button>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3
+                            class="font-bold text-slate-100 group-hover:text-primary transition-colors truncate uppercase">
+                            Ghost Protocol: Alpha</h3>
+                        <div class="flex items-center justify-between text-xs text-slate-500">
+                            <span>Production I.G</span>
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px] text-yellow-500 fill-1">star</span>
+                                <span class="text-slate-200 font-bold">8.5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="group relative flex flex-col space-y-3 cursor-pointer">
+                    <div
+                        class="relative aspect-[2/3] overflow-hidden rounded-xl border border-slate-800 transition-all duration-500 neon-glow">
+                        <img alt="Peyzaj"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiD48obAEp3SccVOJdRIBg5rqK2JnpSWXUD8lFtkp7E_BqVcHzsadFdUQcYws_auV1jZBzZuJSHDlmPhTXBAwz_9dNck1vVCgyCVDOdw-pAwOugE6Bexcn-a5IMWyTrWnOAb9ib9xHjbybD8Fbb2o72J7T0-Y2MAB2AlRv7a5VI0zBudAxggPZWnW5-rsryQbrXOqYim8LGC-xsLRmac0T29h9jV6sEDJnLoD1JgM8tzud35QBENOqJp5kPoOp4LL2Y0wZGQ3RqLY" />
+                        <div
+                            class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black via-black/40 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <button
+                                class="w-full py-2 bg-white text-black font-bold text-sm rounded-lg hover:bg-primary hover:text-white transition-colors flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-sm">play_arrow</span>
+                                Ko'rish
+                            </button>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3
+                            class="font-bold text-slate-100 group-hover:text-primary transition-colors truncate uppercase">
+                            Beyond the Horizon</h3>
+                        <div class="flex items-center justify-between text-xs text-slate-500">
+                            <span>Wit Studio</span>
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px] text-yellow-500 fill-1">star</span>
+                                <span class="text-slate-200 font-bold">9.0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="group relative flex flex-col space-y-3 cursor-pointer">
+                    <div
+                        class="relative aspect-[2/3] overflow-hidden rounded-xl border border-slate-800 transition-all duration-500 neon-glow">
+                        <img alt="Yomg'irli shahar"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwaTyXnR3xBqpFeylgNtdG9_lM8QHWc8HZOzWLEde6S4BdSILUwZg46ePEkzr35w7NYmhD1IhFT5WPBG4RHV90GR88KU-20IPu1Ls-uR0IW6KbXFp3kzn5jg3rzTmRZ8xJQQjatzFQDKgvSHRc2K4gjOV41LJBglyPq467F9asnBbPu5aN0q4IhbbNa_HJBGIgld3DpSHK6UIsYSE_vQz5ed70gD7LZW_PSTtnDt-xqPWEzlCam0iu-BESHN97tTg_fkYDi9tYjWs" />
+                        <div
+                            class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black via-black/40 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <button
+                                class="w-full py-2 bg-white text-black font-bold text-sm rounded-lg hover:bg-primary hover:text-white transition-colors flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-sm">play_arrow</span>
+                                Ko'rish
+                            </button>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3
+                            class="font-bold text-slate-100 group-hover:text-primary transition-colors truncate uppercase">
+                            Neon Drift: 2049</h3>
+                        <div class="flex items-center justify-between text-xs text-slate-500">
+                            <span>Studio Trigger</span>
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px] text-yellow-500 fill-1">star</span>
+                                <span class="text-slate-200 font-bold">8.7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="group relative flex flex-col space-y-3 cursor-pointer">
+                    <div
+                        class="relative aspect-[2/3] overflow-hidden rounded-xl border border-slate-800 transition-all duration-500 neon-glow">
+                        <img alt="Kosmos"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuADeLuhM4CJaWNDChPZv1Y71B8Ak48Ysju5xYXqkr0fi76J6j6oACahiXUsQ1khABLBEtW4qzafS3Jp4Np9U5_z2pGNihr9HQabI5Dq72HdECgXBSE2cQTOeGTAO76e9f-tSOPqHHOV7cShMWiPD80PYt7DEddVIiUhPYEeKA2Ob3l-hUN4xqjGvUF1hH5W67yWokJq6p1X8xCKJjVq8YjK4y-VPldWB05fEt4Jdrbo6txcSYeU_8cLEfhycOCDo-b1sLj-c4m9p1w" />
+                        <div class="absolute top-3 left-3">
+                            <span
+                                class="px-2 py-1 bg-primary text-white text-[10px] font-bold rounded shadow-lg uppercase">Yangi</span>
+                        </div>
+                        <div
+                            class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black via-black/40 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <button
+                                class="w-full py-2 bg-white text-black font-bold text-sm rounded-lg hover:bg-primary hover:text-white transition-colors flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-sm">play_arrow</span>
+                                Ko'rish
+                            </button>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3
+                            class="font-bold text-slate-100 group-hover:text-primary transition-colors truncate uppercase">
+                            Starbound Odyssey</h3>
+                        <div class="flex items-center justify-between text-xs text-slate-500">
+                            <span>A-1 Pictures</span>
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px] text-yellow-500 fill-1">star</span>
+                                <span class="text-slate-200 font-bold">8.9</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="group relative flex flex-col space-y-3 cursor-pointer">
+                    <div
+                        class="relative aspect-[2/3] overflow-hidden rounded-xl border border-slate-800 transition-all duration-500 neon-glow">
+                        <img alt="Aeroplan"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNeg53bkJQbrYoLHCgRbXKMK4CkKde4p6N2z9dJlp5EQHspqR12lCKDCqNKnLyY5ncVC_E8zSZYesk5U8DbCJwnMVaIR_Rhm6xK54TnQFdbvWdGilzA-SVUj6EF1RzBZrpJaaUpy_Gfe3zu2fCkpBtK-eekXxLogOfjLtG4LN4FKSrjj9VymMOxLfAl-MM57XIkDFpMAz8LIEVffmNe4gQglmhvqeZlPg_HIz7KYEQ4SoVrmXVRvtDWYu_LhLo3lehFyc5seyQVi8" />
+                        <div
+                            class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black via-black/40 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <button
+                                class="w-full py-2 bg-white text-black font-bold text-sm rounded-lg hover:bg-primary hover:text-white transition-colors flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-sm">play_arrow</span>
+                                Ko'rish
+                            </button>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3
+                            class="font-bold text-slate-100 group-hover:text-primary transition-colors truncate uppercase">
+                            Aether Ventures</h3>
+                        <div class="flex items-center justify-between text-xs text-slate-500">
+                            <span>Studio Bones</span>
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px] text-yellow-500 fill-1">star</span>
+                                <span class="text-slate-200 font-bold">8.4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="group relative flex flex-col space-y-3 cursor-pointer">
+                    <div
+                        class="relative aspect-[2/3] overflow-hidden rounded-xl border border-slate-800 transition-all duration-500 neon-glow">
+                        <img alt="Ko'k sochli qahramon"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQyeBYbwrRACioEdzHHawu2qW-qQswTDD_rMiDBc7jQeawTiBaaAdgXbgX2ZONob-i8uh_zBjK1JpFeTgiKfZJSqwhFf1sNNLYm0Em3b1CTfGdlXAUvQt964V3XLoFFLkBRJPzYXl6BWRPIwFh-3gp0RiNbaI8Y0cyRpy8iG2ZrkeQlDKjmwY4of3-DqKnP7IgO3IzjnrZVKQSQPyWNLytZZymRh9mEgmbFeCKjpGWZtn3TH_e8NnzrNZXkiadqQ8uGUxxPUJXzfs" />
+                        <div
+                            class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black via-black/40 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <button
+                                class="w-full py-2 bg-white text-black font-bold text-sm rounded-lg hover:bg-primary hover:text-white transition-colors flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-sm">play_arrow</span>
+                                Ko'rish
+                            </button>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h3
+                            class="font-bold text-slate-100 group-hover:text-primary transition-colors truncate uppercase">
+                            Resonance of Souls</h3>
+                        <div class="flex items-center justify-between text-xs text-slate-500">
+                            <span>Studio Madhouse</span>
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px] text-yellow-500 fill-1">star</span>
+                                <span class="text-slate-200 font-bold">9.1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-16 flex flex-col items-center gap-6">
+                <button
+                    class="group px-8 py-3 bg-slate-800 border border-slate-700 rounded-xl font-bold hover:bg-primary hover:border-primary transition-all flex items-center gap-3">
+                    Yana yuklash
+                    <span class="material-symbols-outlined group-hover:rotate-180 transition-transform">refresh</span>
+                </button>
+                <div class="flex gap-2">
+                    <div class="w-12 h-1 bg-primary rounded-full"></div>
+                    <div class="w-12 h-1 bg-slate-800 rounded-full"></div>
+                    <div class="w-12 h-1 bg-slate-800 rounded-full"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="mt-20 border-t border-slate-800 py-10 glass-panel">
+        <div class="max-w-[1600px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-2 opacity-50">
+                <span class="material-symbols-outlined text-primary">bolt</span>
+                <span class="text-sm font-bold tracking-widest uppercase">Anireply Digital Archive © 2026</span>
+            </div>
+            <div class="flex gap-8">
+                <a class="text-xs font-bold text-slate-500 hover:text-white transition-colors uppercase tracking-widest"
+                    href="#">Maxfiylik siyosati</a>
+                <a class="text-xs font-bold text-slate-500 hover:text-white transition-colors uppercase tracking-widest"
+                    href="#">Tarmoq holati</a>
+                <a class="text-xs font-bold text-slate-500 hover:text-white transition-colors uppercase tracking-widest"
+                    href="#">API ruxsati</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
