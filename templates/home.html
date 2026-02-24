@@ -6,7 +6,8 @@
     <div class="absolute inset-0 z-0">
         {% if banners %}
             <img alt="Hero Banner" class="h-full w-full object-cover"
-                src="{{ banners.image.url }}" />
+                src="{{ banners.0.image }}" />
+                
         {% else %}
             <img alt="Hero Banner" class="h-full w-full object-cover"
                 src="https://via.placeholder.com/1920x1080?text=Banner+Not+Found" />
@@ -42,6 +43,8 @@
             {% endif %}
         </div>
     </div>
+
+    <h1>{{ banners }}</h1>
 </section>
 
 <!-- Janrlar -->
