@@ -233,6 +233,6 @@ def anime_detail(request, pk, episode_number=None):
 
 
 # Faqat bir marta ishlatib, keyin o'chirib tashlang!
-from django.contrib.auth.models import User
-if not User.objects.filter(username='admin').exists():
-    User.objects.create_superuser('admin', 'admin@example.com', 'parol123')
+# from django.contrib.auth.models import User
+# if not User.objects.filter(username='admin').exists():
+#     User.objects.create_superuser('admin', 'admin@example.com', 'parol123')
