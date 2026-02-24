@@ -111,6 +111,25 @@
             margin-left: 6px;
         }
 
+        #seekBar {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            border-radius: 4px;
+            background: linear-gradient(to right, #ffffff 0%, #ffffff 0%, #444 0%, #444 100%);
+            outline: none;
+        }
+
+        /* Thumb (dumaloq tugma) */
+        #seekBar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+        }
+
         .controls-bar {
             position: absolute;
             bottom: 0;
@@ -234,7 +253,7 @@
                                 <button id="muteBtn" class="btn"><span
                                         class="material-symbols-outlined">volume_up</span></button>
                                 <input type="range" id="volumeSlider" min="0" max="100" value="85" class="slider w-28">
-                                <select id="playbackSpeed" class="control-select">
+                                <select id="playbackSpeed" class="control-select bg-black">
                                     <option value="0.75">0.75×</option>
                                     <option value="1" selected>1.0×</option>
                                     <option value="1.25">1.25×</option>
@@ -332,8 +351,7 @@
                     <div>
                         <span class="text-slate-400 block mb-1">Dublyaj holati</span>
                         <div class="h-2.5 bg-slate-700 rounded-full overflow-hidden">
-                            <div class="h-full bg-primary rounded-full transition-all"
-                                ></div>
+                            <div class="h-full bg-primary rounded-full transition-all"></div>
                         </div>
                         <span class="text-xs text-slate-300 mt-1">{{ anime.dubbed_percentage }}% dublyaj qilingan</span>
                     </div>
@@ -348,15 +366,15 @@
         </div>
     </footer>
 
+    <!-- YouTube API -->
     <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
-        // Global o'zgaruvchilar
         let player;
-        let isMuted = false;
         let currentVolume = 85;
 
-        // DOM elementlari
+        // Elementlar
+        const videoWrapper = document.getElementById('videoWrapper');
         const overlayPlay = document.getElementById('overlayPlay');
         const playPauseBtn = document.getElementById('playPauseBtn');
         const seekBar = document.getElementById('seekBar');
@@ -368,9 +386,11 @@
         const pipBtn = document.getElementById('pipBtn');
         const fullscreenBtn = document.getElementById('fullscreenBtn');
 
-        // YouTube API yuklanganda
+        // API ready
         function onYouTubeIframeAPIReady() {
-            if (! '{{ youtube_id }}') {
+
+            const videoId = "{{ youtube_id }}";
+            if (!videoId) {
                 console.warn("youtube_id topilmadi");
                 return;
             }
@@ -378,45 +398,43 @@
             player = new YT.Player('player', {
                 height: '100%',
                 width: '100%',
-                videoId: '{{ youtube_id }}',
+                videoId: videoId,
                 playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'rel': 0,
-                    'modestbranding': 1,
-                    'fs': 1,
-                    'playsinline': 1
+                    autoplay: 0,
+                    controls: 0,
+                    rel: 0,
+                    modestbranding: 1,
+                    fs: 1,
+                    playsinline: 1
                 },
                 events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
+                    onReady: onPlayerReady,
+                    onStateChange: onPlayerStateChange
                 }
             });
         }
 
-        function onPlayerReady(event) {
-            // boshlang'ich volume
-            player.setVolume(currentVolume);
-            volumeSlider.value = currentVolume;
+        function onPlayerReady() {
 
-            // durationni olish uchun biroz kutamiz
+            player.setVolume(currentVolume);
+            if (volumeSlider) volumeSlider.value = currentVolume;
+
             setTimeout(() => {
-                let dur = player.getDuration();
+                const dur = player.getDuration();
                 if (dur > 0) {
                     duration.textContent = formatTime(dur);
                     seekBar.max = dur;
                 }
-            }, 700);
+            }, 800);
 
-            // event listenerlar
             overlayPlay?.addEventListener('click', togglePlayPause);
             playPauseBtn?.addEventListener('click', togglePlayPause);
 
-            seekBar?.addEventListener('input', (e) => {
-                player.seekTo(e.target.value, true);
+            seekBar?.addEventListener('input', e => {
+                player.seekTo(Number(e.target.value), true);
             });
 
-            volumeSlider?.addEventListener('input', (e) => {
+            volumeSlider?.addEventListener('input', e => {
                 currentVolume = Number(e.target.value);
                 player.setVolume(currentVolume);
                 updateVolumeIcon();
@@ -425,111 +443,112 @@
             muteBtn?.addEventListener('click', () => {
                 if (player.isMuted()) {
                     player.unMute();
-                    volumeSlider.value = currentVolume;
                 } else {
                     player.mute();
-                    volumeSlider.value = 0;
                 }
                 updateVolumeIcon();
             });
 
-            playbackSpeed?.addEventListener('change', (e) => {
+            playbackSpeed?.addEventListener('change', e => {
                 player.setPlaybackRate(Number(e.target.value));
             });
 
             pipBtn?.addEventListener('click', tryPictureInPicture);
-
             fullscreenBtn?.addEventListener('click', toggleFullscreen);
 
-            // har 700-800ms da progress yangilash
-            setInterval(updatePlayerUI, 750);
+            setInterval(updatePlayerUI, 700);
         }
 
         function onPlayerStateChange(event) {
-            switch (event.data) {
-                case YT.PlayerState.PLAYING:
-                    playPauseBtn.querySelector('span').textContent = 'pause';
-                    overlayPlay.style.display = 'none';
-                    break;
-                case YT.PlayerState.PAUSED:
-                case YT.PlayerState.ENDED:
-                    playPauseBtn.querySelector('span').textContent = 'play_arrow';
-                    if (event.data === YT.PlayerState.ENDED) {
-                        overlayPlay.style.display = 'flex';
-                    }
-                    break;
+
+            if (!playPauseBtn) return;
+
+            const icon = playPauseBtn.querySelector('span');
+
+            if (event.data === YT.PlayerState.PLAYING) {
+                icon.textContent = 'pause';
+                overlayPlay.style.display = 'none';
+            }
+
+            if (event.data === YT.PlayerState.PAUSED) {
+                icon.textContent = 'play_arrow';
+            }
+
+            if (event.data === YT.PlayerState.ENDED) {
+                icon.textContent = 'play_arrow';
+                overlayPlay.style.display = 'flex';
             }
         }
 
-                // Video oynasini bosganda pause qilish
-        videoWrapper?.addEventListener('click', (e) => {
-            // Agar tugmalar ustiga bosilgan bo'lsa, e'tibor bermaymiz
-            if (e.target.closest('.btn') || e.target.closest('.controls-bar') || e.target.closest('select')) {
-                return;
-            }
-            
+        function togglePlayPause() {
             if (!player) return;
-            
-            if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+
+            const state = player.getPlayerState();
+
+            if (state === YT.PlayerState.PLAYING) {
                 player.pauseVideo();
                 overlayPlay.style.display = 'flex';
             } else {
                 player.playVideo();
                 overlayPlay.style.display = 'none';
             }
+        }
+
+        videoWrapper?.addEventListener('click', e => {
+
+            if (e.target.closest('.btn') ||
+                e.target.closest('.controls-bar') ||
+                e.target.closest('select')) return;
+
+            togglePlayPause();
         });
 
         function updatePlayerUI() {
             if (!player) return;
 
-            let curr = player.getCurrentTime() || 0;
-            let dur = player.getDuration() || 0;
+            const curr = player.getCurrentTime() || 0;
+            const dur = player.getDuration() || 0;
 
             if (dur > 0) {
-                if (duration.textContent === '0:00') {
-                    duration.textContent = formatTime(dur);
-                    seekBar.max = dur;
-                }
                 seekBar.value = curr;
                 currentTime.textContent = formatTime(curr);
             }
         }
-                // Space tugmasi bilan play/pause (native YouTube kabi)
-        document.addEventListener('keydown', function(e) {
-            // Agar focus input yoki textarea da bo'lsa, space ni e'tiborsiz qoldiramiz
-            // (masalan komment yozayotganda video to'xtamasligi uchun)
-            const activeElement = document.activeElement;
-            const tag = activeElement.tagName.toLowerCase();
-            if (tag === 'input' || tag === 'textarea' || tag === 'select') {
-                return;
+
+        document.addEventListener('keydown', e => {
+
+            const tag = document.activeElement.tagName.toLowerCase();
+            if (['input', 'textarea', 'select'].includes(tag)) return;
+
+            if (!player) return;
+
+            if (e.code === 'Space') {
+                e.preventDefault();
+                togglePlayPause();
             }
 
-            // Space bar = key " " yoki keyCode 32
-            if (e.code === 'Space' || e.key === ' ' || e.keyCode === 32) {
-                e.preventDefault();  // sahifa scroll bo'lmasligi uchun (muhim!)
-
-                if (!player) return;
-
-                const state = player.getPlayerState();
-
-                if (state === YT.PlayerState.PLAYING) {
-                    player.pauseVideo();
-                } else if (state === YT.PlayerState.PAUSED || state === YT.PlayerState.ENDED || state === -1) {
-                    player.playVideo();
-                }
-                // boshqa holatlarda (buffering va h.k.) hech narsa qilmaymiz
+            if (e.code === 'ArrowRight') {
+                e.preventDefault();
+                player.seekTo(player.getCurrentTime() + 10, true);
             }
-        }); 
+
+            if (e.code === 'ArrowLeft') {
+                e.preventDefault();
+                player.seekTo(Math.max(0, player.getCurrentTime() - 10), true);
+            }
+        });
 
         function formatTime(seconds) {
-            let min = Math.floor(seconds / 60);
-            let sec = Math.floor(seconds % 60);
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
             return min + ':' + (sec < 10 ? '0' : '') + sec;
         }
 
         function updateVolumeIcon() {
-            let vol = player.getVolume();
-            let icon = muteBtn.querySelector('span');
+            if (!muteBtn || !player) return;
+
+            const vol = player.getVolume();
+            const icon = muteBtn.querySelector('span');
 
             if (player.isMuted() || vol === 0) {
                 icon.textContent = 'volume_off';
@@ -547,51 +566,42 @@
             if (document.pictureInPictureElement) {
                 document.exitPictureInPicture().catch(() => { });
             } else if (iframe.requestPictureInPicture) {
-                iframe.requestPictureInPicture().catch(err => {
-                    console.warn("PiP ishlamadi:", err);
-                });
+                iframe.requestPictureInPicture().catch(() => { });
             }
         }
 
         function toggleFullscreen() {
-            const wrapper = document.getElementById('videoWrapper');
-            if (!wrapper) return;
+            if (!videoWrapper) return;
 
             if (!document.fullscreenElement) {
-                wrapper.requestFullscreen().catch(err => {
-                    console.warn("Fullscreen ishlamadi:", err);
-                });
+                videoWrapper.requestFullscreen().catch(() => { });
             } else {
                 document.exitFullscreen().catch(() => { });
             }
         }
-
-                // Arrow keys bilan 10 soniya oldinga/orqaga o'tkazish
-        document.addEventListener('keydown', function(e) {
-            // Input/textarea da bo'lsa e'tibor bermaymiz
-            const active = document.activeElement;
-            const tag = active.tagName.toLowerCase();
-            if (tag === 'input' || tag === 'textarea' || tag === 'select') {
-                return;
-            }
-
+        function updatePlayerUI() {
             if (!player) return;
 
-            // O'ng strelka → +10 soniya
-            if (e.code === 'ArrowRight' || e.key === 'ArrowRight') {
-                e.preventDefault();
-                const current = player.getCurrentTime() || 0;
-                player.seekTo(current + 10, true);
-            }
+            const curr = player.getCurrentTime() || 0;
+            const dur = player.getDuration() || 0;
 
-            // Chap strelka → -10 soniya
-            if (e.code === 'ArrowLeft' || e.key === 'ArrowLeft') {
-                e.preventDefault();
-                const current = player.getCurrentTime() || 0;
-                player.seekTo(Math.max(0, current - 10), true);  // 0 dan pastga tushmasin
+            if (dur > 0) {
+                seekBar.value = curr;
+                currentTime.textContent = formatTime(curr);
+
+                const percent = (curr / dur) * 100;
+
+                // KO'RILGAN QISMI OQ BO'LADI
+                seekBar.style.background = `
+                    linear-gradient(to right,
+                        #ffffff 0%,
+                        #ffffff ${percent}%,
+                        #444 ${percent}%,
+                        #444 100%)
+                `;
             }
-        });
-    </script>А
+        }
+    </script>
 </body>
 
 </html>
