@@ -78,8 +78,18 @@ def anime_list(request):
 
 
 def animelar_page(request):
+    query = request.GET.get('q')
     animes = Anime.objects.all()
-    return render(request, 'animelar.html', {'animes': animes})
+
+    if query:
+        animes = animes.filter(title__icontains=query)
+
+    context = {
+        'animes': animes,
+        'query': query
+    }
+
+    return render(request, 'animelar.html', context)
 
 
 
