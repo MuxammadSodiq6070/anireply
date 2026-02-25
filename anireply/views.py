@@ -7,67 +7,17 @@ from .models import Anime, Episode
 from django.shortcuts import render, redirect
 from .models import Anime
 def home_page(request):
-    # Bannerlar, mashhurlar va yangi qismlar uchun filterlar
     banners = Anime.objects.filter(is_banner=True)
-    popular = Anime.objects.filter(is_popular=True)
-    new_episodes = Anime.objects.filter(is_new_episode=True)
-
-    # Janrlar: distinct janrlarni olish
-    genres = Anime.objects.values_list('genre', flat=True).distinct()
-
-    context = {
-        'banners': banners,
-        'popular_animes': popular,
-        'new_episodes_animes': new_episodes,
-        'genres_list': genres,
-    }
-    return render(request, 'home.html', context)
-    # Banner animelar
-    banners = Anime.objects.filter(is_banner=True)
-    
-    # Popular animelar
     popular_animes = Anime.objects.filter(is_popular=True)
-    
-    # Yangi qismlar
-    new_episodes = Anime.objects.filter(is_new_episode=True)
-    
-    # Janrlar (unique values)
-    genres = Anime.objects.values_list('genre', flat=True).distinct()
-    
-    context = {
+    new_episodes_animes = Anime.objects.filter(is_new_episode=True)
+    genres_list = Anime.objects.values_list('genre', flat=True).distinct()
+
+    return render(request, 'home.html', {
         'banners': banners,
         'popular_animes': popular_animes,
-        'new_episodes': new_episodes,
-        'genres': genres,
-    }
-    
-    return render(request, 'home.html', context)
-    # Banner uchun
-    banners = Anime.objects.filter(is_banner=True)
-    
-    # Popular animelar
-    popular = Anime.objects.filter(is_popular=True)
-    
-    # Yangi qismlar
-    new_episodes = Anime.objects.filter(is_new_episode=True)
-    
-    # Janrlar (unique values)
-    genres = Anime.objects.values_list('genre', flat=True).distinct()
-    
-    context = {
-        'banners': banners,
-        'popular_animes': popular,
-        'new_episodes': new_episodes,
-        'genres': genres,
-    }
-    
-    return render(request, 'home.html', context)
-    if not request.user.is_authenticated:
-        return redirect('login')
-    
-    # Barcha animelarni bazadan o'qish, so'nggi qo'shilgan 1 tasi banner uchun
-    latest_anime = Anime.objects.order_by('-created_at').first()  # banner
-    return render(request, 'home.html', {'latest_anime': latest_anime})
+        'new_episodes_animes': new_episodes_animes,
+        'genres_list': genres_list,
+    })
 
 def anime_list(request):
     animes = Anime.objects.order_by('-created_at')  # barcha animelar

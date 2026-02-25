@@ -1,59 +1,103 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!-- Bannerlar -->
-<section class="relative h-[85vh] w-full overflow-hidden">
+<style>
+    :root {
+        --primary-neon: #9D50FF;
+        --secondary-neon: #00FFA3;
+        --bg-deep: #0F051D;
+    }
+    .text-glow {
+        text-shadow: 0 0 15px rgba(157, 80, 255, 0.7);
+    }
+    .shadow-lightning {
+        box-shadow: 0 0 25px rgba(157, 80, 255, 0.4);
+    }
+    .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    @keyframes pulse-border {
+        0% { border-color: rgba(157, 80, 255, 0.3); }
+        50% { border-color: rgba(157, 80, 255, 0.8); }
+        100% { border-color: rgba(157, 80, 255, 0.3); }
+    }
+    .animate-glow-border {
+        animation: pulse-border 3s infinite;
+    }
+</style>
+
+<section class="relative h-[70vh] md:h-[80vh] lg:h-[90vh] w-full overflow-hidden bg-[#0F051D]">
     <div class="absolute inset-0 z-0">
         {% if banners %}
-            <img alt="Hero Banner" class="h-full w-full object-cover"
-                src="{{ banners.0.image }}" />
-                
+            <img alt="{{ banners.0.title }}" 
+                 class="h-full w-full object-cover object-center transition-transform duration-1000 hover:scale-105" 
+                 src="{{ banners.0.image }}" />
         {% else %}
             <img alt="Hero Banner" class="h-full w-full object-cover"
-                src="https://via.placeholder.com/1920x1080?text=Banner+Not+Found" />
+                 src="https://via.placeholder.com/1920x1080?text=Anime+World" />
         {% endif %}
-        <div class="absolute inset-0 bg-gradient-to-r from-background-dark via-background-dark/60 to-transparent"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent"></div>
+        
+        <div class="absolute inset-0 bg-gradient-to-r from-[#0F051D] via-[#0F051D]/70 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0F051D] via-transparent to-[#0F051D]/30"></div>
     </div>
 
-    <div class="relative z-10 flex h-full items-center px-6 lg:px-24">
-        <div class="max-w-2xl space-y-6">
+    <div class="relative z-10 flex h-full items-center px-4 sm:px-8 md:px-16 lg:px-24">
+        <div class="max-w-3xl space-y-4 md:space-y-6">
             {% if banners %}
-            <div class="flex items-center gap-3">
-                <span class="rounded bg-primary/20 px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary border border-primary/30">{{ banners.0.badge }}</span>
-                <span class="flex items-center gap-1 text-xs font-medium text-slate-400">
-                    <span class="material-symbols-outlined text-sm text-yellow-500" style="font-variation-settings: 'FILL' 1">star</span>
-                    {{ banners.0.rating }}
+            <div class="flex items-center gap-3 animate-fade-in">
+                <span class="rounded-full bg-[#9D50FF]/20 px-4 py-1 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-[#9D50FF] border border-[#9D50FF]/40 animate-glow-border">
+                    {{ banners.0.badge|default:"HOT TREND" }}
                 </span>
+                <div class="flex items-center gap-1 glass-card px-3 py-1 rounded-full">
+                    <span class="material-symbols-outlined text-sm text-yellow-400" style="font-variation-settings: 'FILL' 1">star</span>
+                    <span class="text-xs md:text-sm font-bold text-white">{{ banners.0.rating }}</span>
+                </div>
             </div>
-            <h2 class="text-6xl font-black uppercase italic leading-tight tracking-tighter text-white text-glow @[480px]:text-8xl">
+
+            <h2 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase italic leading-none tracking-tighter text-white text-glow">
                 {{ banners.0.title }}
             </h2>
-            <p class="max-w-lg text-lg leading-relaxed text-slate-300">
+
+            <p class="max-w-lg text-sm md:text-lg leading-relaxed text-slate-300/90 line-clamp-2 md:line-clamp-none border-l-2 border-[#9D50FF] pl-4">
                 {{ banners.0.subtitle }}
             </p>
-            <div class="flex flex-wrap gap-4 pt-4">
-                <a href="{% url 'animelar' %}" class="flex items-center gap-2 rounded bg-primary px-8 py-4 text-sm font-bold uppercase tracking-widest text-white shadow-lightning transition-all hover:scale-105 active:scale-95">
-                    <span class="material-symbols-outlined">play_arrow</span> 1-qismni Ko'rish
+
+            <div class="flex flex-col sm:flex-row gap-3 md:gap-4 pt-4 md:pt-6">
+                <a href="{% url 'anime_detail' banners.0.pk %}"
+                   class="group relative flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-[#9D50FF] px-6 py-3 md:px-10 md:py-4 text-xs md:text-sm font-bold uppercase tracking-widest text-white shadow-lightning transition-all hover:brightness-110 active:scale-95">
+                    <span class="material-symbols-outlined text-xl transition-transform group-hover:translate-x-1">play_arrow</span>
+                    Tomosha Qilish
                 </a>
-                <button class="flex items-center gap-2 rounded bg-white/10 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white backdrop-blur-md transition-all hover:bg-white/20 border border-white/10">
-                    <span class="material-symbols-outlined">add</span> Ro'yxatga Qo'shish
+                
+                <button class="flex items-center justify-center gap-2 rounded-xl glass-card px-6 py-3 md:px-10 md:py-4 text-xs md:text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-white/10">
+                    <span class="material-symbols-outlined">add</span> Ro'yxatga Saqlash
                 </button>
             </div>
             {% endif %}
         </div>
     </div>
-
-    <h1>{{ banners }}</h1>
 </section>
 
-<!-- Janrlar -->
-{% include "genres.html" %}
+<div class="bg-[#0F051D] space-y-16 pb-20">
+    <div class="container mx-auto px-4 -mt-10 relative z-20">
+        {% include "genres.html" %}
+    </div>
 
-<!-- Mashhurlar -->
-{% include "popular.html" %}
+    <div class="container mx-auto px-4">
 
-<!-- Yangi Qismlar -->
-{% include "new_episodes.html" %}
+        {% include "popular.html" %}
+    </div>
+
+    <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
+            <span class="hidden md:block text-slate-500 text-sm italic">Bugun yangilangan</span>
+        </div>
+        {% include "new_episodes.html" %}
+    </div>
+</div>
+
+
 
 {% endblock %}
